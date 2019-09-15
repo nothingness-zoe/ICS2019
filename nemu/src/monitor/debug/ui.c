@@ -114,11 +114,11 @@ static int cmd_x(char *args) {
 	char *arg_1 = strtok(NULL, " ");
 	sscanf(arg, "%d", &time);
 	sscanf(arg_1, "%x", &start);
-	printf("%#x:  ", start);
+	printf("%#x:", start);
 	next = start;
 	for (i = 0; i < time; i++){
 		temp = paddr_read(next, 4);
-		printf("%#x  ", temp);
+		printf("  %#x", temp);
 		next += 4;
 	}
 	return 0;
