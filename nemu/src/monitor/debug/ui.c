@@ -108,7 +108,7 @@ static int cmd_info(char *args) {
 }
 
 static int cmd_x(char *args) {
-	vaddr_t start, next;
+	vaddr_t start, next, temp;
 	int time, i;
 	char *arg = strtok(NULL, " ");
 	char *arg_1 = strtok(NULL, " ");
@@ -117,8 +117,8 @@ static int cmd_x(char *args) {
 	printf("%#x:  ", start);
 	next = start;
 	for (i = 0; i < time; i++){
-		next = paddr_read(next, 4);
-		printf("%#x  ", next);
+		temp = paddr_read(next, 4);
+		printf("%#x  ", temp);
 		next += 4;
 	}
 	return 0;
