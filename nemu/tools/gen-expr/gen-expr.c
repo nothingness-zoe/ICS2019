@@ -7,7 +7,6 @@
 
 // this should be enough
 static char buf[65536];
-buf[0] = '\0';
 static int p = 0; // position of buf
 
 uint32_t choose(uint32_t n) {
@@ -16,7 +15,7 @@ uint32_t choose(uint32_t n) {
 
 static void gen_num() {
   for (int i=0; i < 32; i++) {
-    buf[p] = char(choose(10));
+    buf[p] = choose(10);
     p++;
     if (p >= 65536) break;
   }
@@ -64,6 +63,7 @@ static char *code_format =
 "}";
 
 int main(int argc, char *argv[]) {
+  buf[0] = '\0';
   int seed = time(0);
   srand(seed);
   int loop = 1;
