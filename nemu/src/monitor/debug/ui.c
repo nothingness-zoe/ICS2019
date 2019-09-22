@@ -46,6 +46,8 @@ void isa_reg_display();
 
 static int cmd_x(char *args);
 
+static int cmd_p(char *args);
+
 
 
 static struct {
@@ -59,6 +61,7 @@ static struct {
   { "si", "Suspend the execution of the program after stepping through N instructions. When N is not given, the default is 1", cmd_si },
   {"info", "Print register status with r. Print watchpoint information with w", cmd_info},
   {"x", "Output N 4-byte in hexadecimal format from the start memory address", cmd_x},
+  {"p", "Evaluate the expression", cmd_p},
 
   /* TODO: Add more commands */
 
@@ -124,8 +127,15 @@ static int cmd_x(char *args) {
 	return 0;
 }
 
+static int cmd_p(char *args) {
+  char *arg = strtok(NULL, " ");
+  bool success = true;
+  int result = expr(arg, &success);
+  if (success) printf("%#x/n", result);
+  else printf("There are something wrong.\n");
+  return 0;
+}
 
-	
 void ui_mainloop(int is_batch_mode) {
   if (is_batch_mode) {
     cmd_c(NULL);

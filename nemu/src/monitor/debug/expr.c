@@ -40,34 +40,7 @@ static regex_t re[NR_REGEX] = {};
 /* Rules are used for many times.
  * Therefore we compile them only once before any usage.
  */
-void init_regex() {
-  int i;
-  char error_msg[128];
-  int ret;
 
-  for (i = 0; i < NR_REGEX; i ++) {
-    ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
-    if (ret != 0) {
-      regerror(ret, &re[i], error_msg, 128);
-      panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
-    }
-  }
-}
-
-typedef struct token {
-  int type;
-  char str[32];
-} Token;
-
-};
-
-#define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
-
-static regex_t re[NR_REGEX] = {};
-
-/* Rules are used for many times.
- * Therefore we compile them only once before any usage.
- */
 void init_regex() {
   int i;
   char error_msg[128];
@@ -195,6 +168,7 @@ uint32_t find_main_op(int p, int q) {
       }
     }
   }
+  return op;
 }
 
 uint32_t eval(int p, int q) {
