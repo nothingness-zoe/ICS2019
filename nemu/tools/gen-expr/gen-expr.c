@@ -7,13 +7,51 @@
 
 // this should be enough
 static char buf[65536];
+buf[0] = '\0';
+static int p = 0; // position of buf
+
+uint32_t choose(uint32_t n) {
+  return rand()%n;
+}
+
+static void gen_num() {
+  for (int i=0; i < 32; i++) {
+    buf[p] = char(choose(10));
+    p++;
+    if (p >= 65536) break;
+  }
+}
+
+static void gen(char s) {
+  buf[p] = s;
+  p++;
+}
+
+static void gen_rand_op() {
+  switch(choose(4)) {
+    case 0: buf[p] = '+'; break;
+    case 1: buf[p] = '-'; break;
+    case 2: buf[p] = '*'; break;
+    default: buf[p] = '/'; break;
+  }
+  p++;
+}
+
 static inline void gen_rand_expr() {
-  buf[0] = '\0';
+  if (p >= 65536) return;
   switch(choose(3)) {
     case 0: gen_num(); break;
     case 1: gen('('); gen_rand_expr(); gen(')'); break;
     default: gen_rand_expr(); gen_rand_op(); gen_rand_expr(); break;
   }
+
+  int i = choose(2);
+  if (i == 1 && p < 65536) {
+    buf[p] = ' ';
+    p++;
+  }
+
+  if (p < 65536) buf[p] = '\0';
 }
 
 static char code_buf[65536];

@@ -230,6 +230,7 @@ uint32_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   
-  eval(0, 31);
-  return 0;
+  uint32_t result;
+  result = eval(0, 31);
+  return result;
 }
