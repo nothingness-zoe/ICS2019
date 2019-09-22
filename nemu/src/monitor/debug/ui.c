@@ -131,7 +131,7 @@ static int cmd_p(char *args) {
   char *arg = strtok(NULL, " ");
   bool success = true;
   int result = expr(arg, &success);
-  if (success) printf("%#x/n", result);
+  if (success) printf("%#x\n", result);
   else printf("There are something wrong.\n");
   return 0;
 }
