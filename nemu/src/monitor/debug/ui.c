@@ -128,7 +128,7 @@ static int cmd_x(char *args) {
 }
 
 static int cmd_p(char *args) {
-  char *arg = strtok(NULL, " ");
+  char *arg = strtok(NULL, "@");
   bool success = true;
   int result = expr(arg, &success);
   if (success) printf("%x\n", result);
