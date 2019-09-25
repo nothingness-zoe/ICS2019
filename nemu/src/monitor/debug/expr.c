@@ -92,33 +92,39 @@ static bool make_token(char *e) {
           case '+':{
             tokens[nr_token].type = rules[i].token_type;
             strncpy(tokens[nr_token].str, substr_start, substr_len);
+            nr_token++;
           } break;
           case '-':{
             tokens[nr_token].type = rules[i].token_type;
             strncpy(tokens[nr_token].str, substr_start, substr_len);
+            nr_token++;
           } break;
           case '*':{
             tokens[nr_token].type = rules[i].token_type;
             strncpy(tokens[nr_token].str, substr_start, substr_len);
+            nr_token++;
           } break;
           case '/':{
             tokens[nr_token].type = rules[i].token_type;
             strncpy(tokens[nr_token].str, substr_start, substr_len);
+            nr_token++;
           } break;
           case '(':{
             tokens[nr_token].type = rules[i].token_type;
             strncpy(tokens[nr_token].str, substr_start, substr_len);
+            nr_token++;
           } break;
           case ')':{
             tokens[nr_token].type = rules[i].token_type;
             strncpy(tokens[nr_token].str, substr_start, substr_len);
+            nr_token++;
           } break;
           case TK_TEN:{tokens[nr_token].type = rules[i].token_type;
             strncpy(tokens[nr_token].str, substr_start, substr_len);
+            nr_token++;
           } break;
           default: assert(0);
         }
-        nr_token++;
         break;
       }
     }
