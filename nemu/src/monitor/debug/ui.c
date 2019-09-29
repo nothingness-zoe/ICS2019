@@ -110,7 +110,7 @@ static int cmd_si(char *args) {
 static int cmd_info(char *args) {
 	char *arg = strtok(NULL, " ");	
 	if (strcmp(arg, "r") == 0) isa_reg_display();
-  else if (strcmp(arg, "w") == 0) // TODO: TBC 
+  //else if (strcmp(arg, "w") == 0) ;  // TODO: TBC 
 	return 0;
 }
 
@@ -140,7 +140,7 @@ static int cmd_p(char *args) {
   return 0;
 }
 
-static int cmd_d(char *args) {}  // TODO: 完成这个函数
+static int cmd_d(char *args) {return 0;}  // TODO: 完成这个函数
 
 void ui_mainloop(int is_batch_mode) {
   if (is_batch_mode) {

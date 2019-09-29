@@ -31,7 +31,7 @@ WP* new_up() {
 }
 
 void free_wp(int n) { // 要求删除第n个节点，故将输入改成n
-  if (wp == NULL) return;
+  if (head == NULL) return;
   WP *p = head;
   if (head->NO == n) {
     head = head->next;
@@ -47,7 +47,7 @@ void free_wp(int n) { // 要求删除第n个节点，故将输入改成n
         free_ = p;
         return;
       }
-      pre = p;
+      p_pre = p;
       p = p->next;
     }
   }
