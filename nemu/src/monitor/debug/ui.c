@@ -48,6 +48,8 @@ static int cmd_x(char *args);
 
 static int cmd_p(char *args);
 
+static int cmd_d(char *args);
+
 
 
 static struct {
@@ -62,6 +64,7 @@ static struct {
   {"info", "Print register status with r. Print watchpoint information with w", cmd_info},
   {"x", "Output N 4-byte in hexadecimal format from the start memory address", cmd_x},
   {"p", "Evaluate the expression", cmd_p},
+  {"d", "delete watchpoint", cmd_d},
 
   /* TODO: Add more commands */
 
@@ -107,6 +110,7 @@ static int cmd_si(char *args) {
 static int cmd_info(char *args) {
 	char *arg = strtok(NULL, " ");	
 	if (strcmp(arg, "r") == 0) isa_reg_display();
+  else if (strcmp(arg, "w") == 0) // TODO: TBC 
 	return 0;
 }
 
@@ -135,6 +139,8 @@ static int cmd_p(char *args) {
   else printf("There are something wrong.\n");
   return 0;
 }
+
+static int cmd_d(char *args) {}  // TODO: 完成这个函数
 
 void ui_mainloop(int is_batch_mode) {
   if (is_batch_mode) {

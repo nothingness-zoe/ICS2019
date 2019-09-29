@@ -7,7 +7,9 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ = 1, TK_TEN = 10
+  TK_NOTYPE = 256, TK_EQ = 1, TK_UEQ = 0,
+  TK_DEC = 10, TK_HEX = 16, TK_REG = 255,
+  TK_POINT = 9
 
   /* TODO: Add more token types */
 
@@ -24,13 +26,17 @@ static struct rule {
 
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
-  {"\\-", '-'},			// minus
-  {"\\*", '*'},			// multiply
-  {"\\/", '/'},			// divide
-  {"\\(", '('},			// left parenthesis
-  {"\\)", ')'},			// right parenthesis
+  {"\\-", '-'},			    // minus
+  {"\\*", '*'},			    // multiply
+  {"\\/", '/'},			    // divide
+  {"\\(", '('},			    // left parenthesis
+  {"\\)", ')'},			    // right parenthesis
+  {"\\$[a-ehilpx]{2,3}", TK_REG},   // register
   {"==", TK_EQ},        // equal
-  {"[0-9]+", TK_TEN},   // dec
+  {"!=", TK_UEQ},       // unequal
+  {"[0-9]+", TK_DEC},   // dec
+  {"0x[0-9a-f]+", TK_HEX},   // hex
+  {"&&", '&'}           // and
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -113,7 +119,32 @@ static bool make_token(char *e) {
             tokens[nr_token].type = rules[i].token_type;
             strncpy(tokens[nr_token].str, substr_start, substr_len);
           } break;
-          case TK_TEN:{tokens[nr_token].type = rules[i].token_type;
+          case TK_DEC:{
+            tokens[nr_token].type = rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+          } break;
+          case TK_HEX:{
+            tokens[nr_token].type = rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+          } break;
+          case TK_POINT:{
+            tokens[nr_token].type = rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+          } break;
+          case TK_EQ:{
+            tokens[nr_token].type = rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+          } break;
+          case TK_UEQ:{
+            tokens[nr_token].type = rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+          } break;
+          case TK_REG:{
+            tokens[nr_token].type = rules[i].token_type;
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+          } break;
+          case '&':{
+            tokens[nr_token].type = rules[i].token_type;
             strncpy(tokens[nr_token].str, substr_start, substr_len);
           } break;
           default: assert(0);
@@ -160,8 +191,12 @@ uint32_t find_main_op(int p, int q) {
     else if (tokens[i].type == ')') right++;
 
     if (left == right) {
-      if (tokens[i].type == TK_TEN || tokens[i].type == TK_NOTYPE) continue;
-      if (tokens[i].type == '+' || tokens[i].type == '-') op = i;
+      if (tokens[i].type == TK_DEC || tokens[i].type == TK_NOTYPE || \
+      tokens[i].type == TK_HEX || tokens[i].type == TK_POINT) continue;
+      if (tokens[i].type == '+' || tokens[i].type == '-') {
+        if (tokens[i].type == '-' && (i == 0 || tokens[i-1].type == '+' || \
+        tokens[i-1].type == '-' || tokens[i-1].type == '*' || tokens[i-1].type == '/')) ;
+        else op = i;  // 判断减号是否为负数标志
       if (tokens[i].type == '*' || tokens[i].type == '/') {
         if (tokens[op].type == '+' || tokens[op].type == '-') continue;
         else op = i;
@@ -175,22 +210,37 @@ uint32_t eval(int p, int q) {
   if (p > q) assert(0);
   else if (p == q) {
     int number = 0;
-    sscanf(tokens[p].str, "%d", &number);
+    if (tokens[p].type == TK_DEC) sscanf(tokens[p].str, "%d", &number);
+    else if (tokens[p].type == TK_HEX) sscanf(tokens[p].str, "%x", &number);
+    else if (tokens[p].type == TK_REG) {
+      for (int i=0; i < 4; i++) tokens[p].str[i] = tokens[p].str[i+1]; // 去$
+    }
     return number;
   }
   else if (check_parentheses(p, q) == true) return eval(p+1, q-1);
   else {
     int op;
     op = find_main_op(p, q);
+
+    // 判断是否为指针或者负数
+    if (op == p && tokens[op].type == TK_POINT)
+      return vaddr_read(eval(p+1, q), 4);
+    if (op == p && tokens[op].type == '-')
+      return -eval(p+1, q);
+    
     uint32_t val1, val2;
     val1 = eval(p, op-1);
     val2 = eval(op+1, q);
 
+    
     switch(tokens[op].type) {
       case '+': return val1+val2; break;
       case '-': return val1-val2; break;
       case '*': return val1*val2; break;
       case '/': return val1/val2; break;
+      case '&': return val1&val2; break;
+      case TK_UEQ: return val1!=val2; break;
+      case TK_EQ: return val1==val2; break;
       default: assert(0);
     }
   }
@@ -204,5 +254,11 @@ uint32_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   
+  for(int i = 0; i < nr_token; i++) {
+    if(tokens[i].type == '*' && (i == 0 || tokens[i-1].type == '+' || \
+    tokens[i-1].type == '-' || tokens[i-1].type == '*' || tokens[i-1].type == '/')) {
+      tokens[i].type = TK_POINT;
+    }
+  }  // 判断是否为指针类型
   return eval(0, nr_token-1);
 }

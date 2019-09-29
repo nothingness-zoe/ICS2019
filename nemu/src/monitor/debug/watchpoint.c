@@ -21,3 +21,34 @@ void init_wp_pool() {
 /* TODO: Implement the functionality of watchpoint */
 
 
+WP* new_up() {
+  WP *p = free_;
+  if (p == NULL) assert(0);
+  free_ = free_->next;
+  p->next = head;
+  head = p;
+  return p;
+}
+
+void free_wp(int n) { // 要求删除第n个节点，故将输入改成n
+  if (wp == NULL) return;
+  WP *p = head;
+  if (head->NO == n) {
+    head = head->next;
+    p->next = free_;
+    free_ = p;
+  }
+  else {
+    WP *p_pre = p;
+    for (int i=0; i < 32; i++) {
+      if (p->NO == n) {
+        p_pre->next = p->next;
+        p->next = free_;
+        free_ = p;
+        return;
+      }
+      pre = p;
+      p = p->next;
+    }
+  }
+}
