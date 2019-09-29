@@ -193,13 +193,17 @@ uint32_t find_main_op(int p, int q) {
     if (left == right) {
       if (tokens[i].type == TK_DEC || tokens[i].type == TK_NOTYPE || \
       tokens[i].type == TK_HEX || tokens[i].type == TK_POINT) continue;
-      if (tokens[i].type == '+' || tokens[i].type == '-') {
-        if (tokens[i].type == '-' && (i == 0 || tokens[i-1].type == '+' || tokens[i-1].type == '-' || tokens[i-1].type == '*' || tokens[i-1].type == '/')) continue;
-        else op = i;  // 判断减号是否为负数标志
-      }
-      if (tokens[i].type == '*' || tokens[i].type == '/') {
-        if (tokens[op].type == '+' || tokens[op].type == '-') continue;
-        else op = i;
+      if (tokens[i].type == '&' || tokens[i].type == TK_UEQ || tokens[i].type == TK_EQ)
+        op = i;
+      if (tokens[op].type != '&' && tokens[op].type != TK_EQ && tokens[op].type != TK_UEQ) {
+        if (tokens[i].type == '+' || tokens[i].type == '-') {
+          if (tokens[i].type == '-' && (i == 0 || tokens[i-1].type == '+' || tokens[i-1].type == '-' || tokens[i-1].type == '*' || tokens[i-1].type == '/')) continue;
+          else op = i;  // 判断减号是否为负数标志
+        }
+        if (tokens[i].type == '*' || tokens[i].type == '/') {
+          if (tokens[op].type == '+' || tokens[op].type == '-') continue;
+          else op = i;
+        }
       }
     }
   }
