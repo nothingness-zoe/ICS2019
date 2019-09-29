@@ -68,6 +68,7 @@ void set_wp(char *e) {
   p = new_up();
   printf("Set watchpoint %d\n", p->NO);
   strcpy(p->expr, e);
+  printf("expr = %s\n", p->expr);
   bool success = true;
   p->val_1 = expr(p->expr, &success);
   if (!success) printf("Bad expression.\n");
@@ -85,10 +86,12 @@ WP* scan_wp() {
     for (; p != NULL; p=p->next) {
       p->val_2 = expr(p->expr, &success);
       if (!success)
-        printf ("Fail to eval val_2 in watchpoint %d", p->NO);
+        printf("Fail to eval val_2 in watchpoint %d", p->NO);
       else {
         if (p->val_1 != p->val_2) {
-          printf ("Trigger watchpoint %d\n", p->NO);
+          printf("Trigger watchpoint %d\n", p->NO);
+          printf("expr = %s \n", p->expr);
+          printf("val_1 = %#x\nval_2 = %#x\n", p->val_1, p->val_2);
           p->val_1 = p->val_2;
           return p;
         }
