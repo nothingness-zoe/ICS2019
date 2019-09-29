@@ -56,10 +56,10 @@ void free_wp(int n) { // 要求删除第n个节点，故将输入改成n
 void info_wp() {
   WP *p = head;
   if( p == NULL) 
-    print ("No watchpoint.\n");
+    printf ("No watchpoint.\n");
   else {
     for(; p != NULL; p = p->next)
-      printf ("%d %s %#x\n", p->NO,p->expr,p->val1);
+      printf ("%d %s %#x\n", p->NO,p->expr,p->val_1);
   }
 }
 
@@ -69,9 +69,9 @@ void set_wp(char *e) {
   printf("Set watchpoint %d\n", p->NO);
   strcpy(p->expr, e);
   bool success = true;
-  p->val1 = expr(p->expr, &success);
-  if (!success) print("Bad expression.\n");
-  else printf("Old value = %#x\n", p->expr);
+  p->val_1 = expr(p->expr, &success);
+  if (!success) printf("Bad expression.\n");
+  else printf("Old value = %#x\n", p->val_1);
 }
 
 WP* scan_wp() {
@@ -83,13 +83,13 @@ WP* scan_wp() {
   }
   else {
     for (; p != NULL; p=p->next) {
-      p->val2 = expr(p->expr, &success);
+      p->val_2 = expr(p->expr, &success);
       if (!success)
-        printf ("Fail to eval val2 in watchpoint %d", p->NO);
+        printf ("Fail to eval val_2 in watchpoint %d", p->NO);
       else {
-        if (p->val1 != p->val2) {
+        if (p->val_1 != p->val_2) {
           printf ("Trigger watchpoint %d\n", p->NO);
-          p->val1 = p->val2;
+          p->val_1 = p->val_2;
           return p;
         }
       }

@@ -62,7 +62,7 @@ void cpu_exec(uint64_t n) {
   
   WP *p = scan_wp();
   if (p != NULL)
-    nemu_state = NEMU_STOP;
+    nemu_state.state = NEMU_STOP;
 
 #endif
 
