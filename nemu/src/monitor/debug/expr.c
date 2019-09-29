@@ -218,6 +218,13 @@ uint32_t eval(int p, int q) {
     else if (tokens[p].type == TK_HEX) sscanf(tokens[p].str, "%x", &number);
     else if (tokens[p].type == TK_REG) {
       for (int i=0; i < 4; i++) tokens[p].str[i] = tokens[p].str[i+1]; // 去$
+      char* s = strtok(tokens[p].str, " ");
+      bool success = true;
+      number = isa_reg_str2val(s, &success);
+      if (!success) {
+        printf("Fail to get reg\n");
+        return false;
+      }
     }
     return number;
   }

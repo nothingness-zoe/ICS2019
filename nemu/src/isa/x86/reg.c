@@ -58,7 +58,14 @@ void isa_reg_display() {
 	}
 }
 
-uint32_t isa_reg_str2val(const char *s, bool *success) {
-  
-  return 0;
+uint32_t isa_reg_str2val(char *s, bool* success) {
+  uint32_t number=0;
+  for (int i = 0; i < 8; i++) {
+    if (strcmp(s, regsw[i]) == 0) {
+      number = cpu.gpr[i]._16;
+      break;
+    }
+  }
+  if (number == 0) success = false;
+  return number;
 }
