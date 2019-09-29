@@ -42,11 +42,11 @@ static int cmd_si(char *args);
 
 static int cmd_info(char *args);
 
-void isa_reg_display();
-
 static int cmd_x(char *args);
 
 static int cmd_p(char *args);
+
+static int cmd_w(char *args);
 
 static int cmd_d(char *args);
 
@@ -64,7 +64,8 @@ static struct {
   {"info", "Print register status with r. Print watchpoint information with w", cmd_info},
   {"x", "Output N 4-byte in hexadecimal format from the start memory address", cmd_x},
   {"p", "Evaluate the expression", cmd_p},
-  {"d", "delete watchpoint", cmd_d},
+  {"w", "Set watchpoint", cmd_w},
+  {"d", "Delete watchpoint", cmd_d},
 
   /* TODO: Add more commands */
 
@@ -136,11 +137,22 @@ static int cmd_p(char *args) {
   bool success = true;
   int result = expr(arg, &success);
   if (success) printf("%#x\n", result);
-  else printf("There are something wrong.\n");
+  else printf("Bad expression.\n");
   return 0;
 }
 
-static int cmd_d(char *args) {return 0;}  // TODO: 完成这个函数
+static int cmd_w(char *args) {
+  char *arg = strtok(NULL, " ");
+  set_wp(args);
+  return 0;
+}
+static int cmd_d(char *args) {
+  char *arg = strtok(NULL, " ");
+  int n;
+  sscanf(arg, "%d", &n);
+  free_wp(n);
+  return 0;
+}
 
 void ui_mainloop(int is_batch_mode) {
   if (is_batch_mode) {

@@ -16,4 +16,11 @@ typedef struct watchpoint {
 
 } WP;
 
+
+WP* new_up();
+void free_wp(int n);
+void info_wp();
+void set_wp(char *e);
+WP* scan_wp();
+
 #endif
