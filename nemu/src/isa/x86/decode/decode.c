@@ -29,7 +29,7 @@ static inline make_DopHelper(SI) {
    * pointed by 'pc'. Interpret the result as a signed immediate,
    * and assign it to op->simm.
    *
-   op->simm = ???
+    op->simm = ???
    */
   TODO();
 
