@@ -18,6 +18,7 @@ make_EHelper(ret_imm);
 
 // add.c
 make_EHelper(lea);
+make_EHelper(and);
 
 /*// control.c
 make_EHelper(jmp);
