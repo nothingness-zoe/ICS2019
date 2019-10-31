@@ -69,7 +69,7 @@ make_EHelper(cmp) {
 }
 
 make_EHelper(inc) {
-  s1 = 1
+  s1 = 1;
   rtl_add(&s0, &id_dest->val, &s1);
   operand_write(id_dest, &s0);
 
