@@ -16,6 +16,9 @@ make_EHelper(pop);
 make_EHelper(ret);
 make_EHelper(ret_imm);
 
+// add.c
+make_EHelper(lea);
+
 /*// control.c
 make_EHelper(jmp);
 make_EHelper(jcc);
