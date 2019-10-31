@@ -11,6 +11,7 @@ make_EHelper(nemu_trap);
 make_EHelper(call);
 make_EHelper(push);
 make_EHelper(sub);
+make_EHelper(pop);
 /*// control.c
 make_EHelper(jmp);
 make_EHelper(jcc);
