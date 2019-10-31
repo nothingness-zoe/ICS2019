@@ -32,7 +32,7 @@ static inline make_DopHelper(SI) {
     op->simm = ???
    */
 
-  // i386: taking into count the sign
+  // taking into count the size
   if(op->width == 4) {
     op->simm = instr_fetch(pc, op->width);
   }
