@@ -16,6 +16,7 @@ static bool is_detach = false;
 // can not produce consistent behavior with NEMU
 void difftest_skip_ref() {
   is_skip_ref = true;
+  skip_dut_nr_instr = 0;
 }
 
 // this is used to deal with instruction packing in QEMU.
