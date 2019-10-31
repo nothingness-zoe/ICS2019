@@ -13,11 +13,13 @@ make_EHelper(push);
 make_EHelper(sub);
 make_EHelper(xor);
 make_EHelper(pop);
+make_EHelper(ret);
+make_EHelper(ret_imm);
+
 /*// control.c
 make_EHelper(jmp);
 make_EHelper(jcc);
 make_EHelper(jmp_rm);
 
-make_EHelper(ret);
 make_EHelper(ret_imm);
 make_EHelper(call_rm);*/

@@ -41,7 +41,7 @@ make_EHelper(ret) {
 }
 
 make_EHelper(ret_imm) {
-  TODO();
+  rtl_addi(&cpu.esp, &cpu.esp, 4);
 
   print_asm("ret %s", id_dest->str);
 }
