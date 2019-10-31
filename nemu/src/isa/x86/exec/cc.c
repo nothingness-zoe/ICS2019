@@ -14,20 +14,41 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
   // TODO: Query EFLAGS to determine whether the condition code is satisfied.
   // dest <- ( cc is satisfied ? 1 : 0)
   switch (subcode & 0xe) {
-    case CC_O:
-    case CC_B:
-    case CC_E:
-    case CC_BE:
-    case CC_S:
-    case CC_L:
-    case CC_LE:
-      TODO();
+    case CC_O: // 0x90
+      rtl_get_OF(dest);
+      break;
+    case CC_B: // 0x92
+      rtl_get_CF(dest);
+      break;
+    case CC_E: // 0x94
+      rtl_get_ZF(dest);
+      break;
+    case CC_BE: { // 0x96
+      rtl_get_CF(&t0);
+      rtl_get_ZF(&t1);
+      rtl_or(dest, &t0, &t1);
+    } break;
+    case CC_S: // 0x98
+      rtl_get_SF(dest);
+      break;
+    case CC_L: { // 0x9c
+      rtl_get_SF(&t0);
+      rtl_get_OF(&t1);
+      rtl_xor(dest, &t0, &t1);
+    } break;
+    case CC_LE: { // 0x9e
+      rtl_get_SF(&t0);
+      rtl_get_OF(&t1);
+      rtl_xor(&t0, &t0, &t1);
+      rtl_get_ZF(&t1);
+      rtl_or(dest, &t0, &t1);
+    } break;
     default: panic("should not reach here");
     case CC_P: panic("n86 does not have PF");
   }
 
   if (invert) {
-    rtl_xori(dest, dest, 0x1);
+    rtl_xori(dest, dest, 0x1); // 其他情况，如 CC_NO
   }
   assert(*dest == 0 || *dest == 1);
 }
