@@ -80,6 +80,10 @@ static inline void parse_args(int argc, char *argv[]) {
   }
 }
 
+char* get_mainargs(void) {
+  return mainargs;
+}
+
 int init_monitor(int argc, char *argv[]) {
   /* Perform some global initialization. */
 
