@@ -51,9 +51,9 @@ make_EHelper(cmp) {
     // s0 = dest - src
   rtl_sub(&s0, &id_dest->val, &id_src->val);
   
-  if (id_dest->width != 4) {
+  /*if (id_dest->width != 4) {
     rtl_andi(&s0, &s0, 0xffffffffu >> ((4 - id_dest->width) * 8));
-  }
+  }*/
 
   rtl_update_ZFSF(&s0, id_dest->width);
 
