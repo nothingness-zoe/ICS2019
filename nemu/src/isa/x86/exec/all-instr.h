@@ -24,10 +24,11 @@ make_EHelper(cmp);
 make_EHelper(setcc);
 make_EHelper(movzx);
 make_EHelper(test);
+make_EHelper(jcc);
+
 
 /*// control.c
 make_EHelper(jmp);
-make_EHelper(jcc);
 make_EHelper(jmp_rm);
 
 make_EHelper(ret_imm);
