@@ -20,6 +20,7 @@ make_EHelper(ret_imm);
 make_EHelper(lea);
 make_EHelper(and);
 make_EHelper(add);
+make_EHelper(cmp);
 
 /*// control.c
 make_EHelper(jmp);
