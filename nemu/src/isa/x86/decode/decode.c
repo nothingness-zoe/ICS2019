@@ -33,6 +33,7 @@ static inline make_DopHelper(SI) {
    */
 
   // taking into count the size
+  printf("op->width:%d\n", op->width);
   if(op->width == 4) {
     op->simm = instr_fetch(pc, op->width);
   }
