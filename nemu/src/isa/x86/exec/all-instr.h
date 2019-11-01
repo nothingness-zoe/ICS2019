@@ -40,6 +40,11 @@ make_EHelper(dec);
 // min3.c
 make_EHelper(shl);
 make_EHelper(shr);
+
+// recursion.c
+make_EHelper(jmp_rm);
+make_EHelper(call_rm);
+
 /*// control.c
 make_EHelper(jmp);
 make_EHelper(jmp_rm);
