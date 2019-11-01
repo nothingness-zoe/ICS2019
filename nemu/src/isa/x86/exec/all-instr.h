@@ -31,6 +31,7 @@ make_EHelper(nop);
 
 // add-longlong.c
 make_EHelper(adc);
+make_EHelper(or);
 
 // quick-sort.c
 make_EHelper(jmp);
