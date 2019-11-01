@@ -5,12 +5,12 @@ make_EHelper(add) {
   //printf("id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
   rtl_add(&s0, &id_dest->val, &id_src->val);
 
-  operand_write(id_dest, &s1);
+  operand_write(id_dest, &s0);
   //printf("id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
 
-  if (id_dest->width != 4) {
+  /*if (id_dest->width != 4) {
     rtl_andi(&s0, &s0, 0xffffffffu >> ((4 - id_dest->width) * 8));
-  }
+  }*/
 
   rtl_update_ZFSF(&s0, id_dest->width);
 
