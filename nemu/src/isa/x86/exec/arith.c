@@ -21,7 +21,7 @@ make_EHelper(add) {
   rtl_is_add_overflow(&s1, &s0, &id_dest->val, &id_src->val, id_dest->width);
   rtl_set_OF(&s1);
   
-  printf("After add, id_dest->val=%#x\n",id_dest->val);
+  printf("After add, id_src->val=%#x\n",id_src->val);
 
 
   print_asm_template2(add);
