@@ -33,7 +33,7 @@ make_EHelper(popa) {
 make_EHelper(leave) {
   rtl_mv(&cpu.esp, &cpu.ebp);
   rtl_pop(&cpu.ebp);
-  printf("cpu.esp: %#x\n", cpu.esp);
+  //printf("cpu.esp: %#x\n", cpu.esp);
 
   print_asm("leave");
 }
@@ -70,7 +70,7 @@ make_EHelper(movsx) {
 make_EHelper(movzx) {
   id_dest->width = decinfo.isa.is_operand_size_16 ? 2 : 4;
   operand_write(id_dest, &id_src->val);
-  printf("cpu.esp: %#x\n", cpu.esp);
+  //printf("cpu.esp: %#x\n", cpu.esp);
   print_asm_template2(movzx);
 }
 

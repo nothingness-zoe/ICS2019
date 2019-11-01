@@ -23,7 +23,7 @@ make_EHelper(add) {
   rtl_set_OF(&s1);
   
   //printf("After add, id_src->val=%#x\n",id_src->val);
-  printf("cpu.esp: %#x\n", cpu.esp);
+  //printf("cpu.esp: %#x\n", cpu.esp);
 
 
   print_asm_template2(add);
