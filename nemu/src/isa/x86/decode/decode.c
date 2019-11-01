@@ -42,7 +42,7 @@ static inline make_DopHelper(SI) {
     op->simm = s1;
   }
   else {
-    s0 = ((uint16_t)instr_fetch(pc, op->width));
+    s0 = ((uint8_t)instr_fetch(pc, op->width));
     rtl_sext(&s1, &s0, 1);
     op->simm = s1;
   }
