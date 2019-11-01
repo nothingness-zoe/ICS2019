@@ -31,6 +31,7 @@ make_EHelper(nop);
 
 // quick-sort.c
 make_EHelper(jmp);
+make_EHelper(dec);
 /*// control.c
 make_EHelper(jmp);
 make_EHelper(jmp_rm);
