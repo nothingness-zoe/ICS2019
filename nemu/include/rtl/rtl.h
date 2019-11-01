@@ -167,7 +167,24 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
     default: assert(0);
   }*/
 
-  //int32_t temp = (int32_t)* src1;
+  int32_t temp = (int32_t)* src1;
+  switch(width) {
+    case 4:
+      break;
+    // 参考 arith.c 中的处理
+    case 2: {
+      temp = temp << 16;
+      temp = temp >> 16;
+    }
+      break;
+    case 1: {
+      temp = temp << 24;
+      temp = temp >> 24;
+    }
+      break;
+    default: assert(0);
+  }
+  *dest = temp;
 
   printf("dest: %#x\n", *dest);
 
