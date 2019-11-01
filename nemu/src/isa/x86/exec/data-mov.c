@@ -7,7 +7,7 @@ make_EHelper(mov) {
 
 make_EHelper(push) {
   rtl_push(&id_dest->val);
-
+  printf("cpu.esp: %#x\n", cpu.esp);
   print_asm_template1(push);
 }
 
