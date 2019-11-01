@@ -44,6 +44,8 @@ make_EHelper(shr);
 // recursion.c
 make_EHelper(jmp_rm);
 make_EHelper(call_rm);
+make_EHelper(not);
+make_EHelper(neg);
 
 /*// control.c
 make_EHelper(jmp);
