@@ -32,6 +32,7 @@ make_EHelper(sub) { // 参考SBB
 
   // s0 = dest - src
   rtl_sub(&s0, &id_dest->val, &id_src->val);
+  printf("s0: %#x", s0);
   
   operand_write(id_dest, &s0);
 
