@@ -32,7 +32,7 @@ make_EHelper(sub) { // 参考SBB
 
   // s0 = dest - src
   rtl_sub(&s0, &id_dest->val, &id_src->val);
-  printf("s0: %#x", s0);
+  printf("s0: %#x\n", s0);
   
   operand_write(id_dest, &s0);
 
@@ -50,7 +50,7 @@ make_EHelper(sub) { // 参考SBB
   rtl_is_sub_overflow(&s1, &s0, &id_dest->val, &id_src->val, id_dest->width);
   rtl_set_OF(&s1);
 
-  printf("After sub, id_src->val=%#x\n",id_src->val);
+  printf("After sub, id_dest->reg=%#x\n",id_src->reg);
 
   print_asm_template2(sub);
 }
