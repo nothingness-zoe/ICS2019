@@ -10,14 +10,14 @@ make_EHelper(jmp) {
 
 make_EHelper(jcc) {
   // the target address is calculated at the decode stage
-  printf("jcc\n");
+  //printf("jcc\n");
   uint32_t cc = decinfo.opcode & 0xf;
   rtl_setcc(&s0, cc);
-  printf("after setcc s0=%d\n", s0);
+  //printf("after setcc s0=%d\n", s0);
   rtl_li(&s1, 0);
   rtl_jrelop(RELOP_NE, &s0, &s1, decinfo.jmp_pc);
 
-  printf("jcc success\n");
+  //printf("jcc success\n");
 
   print_asm("j%s %x", get_cc_name(cc), decinfo.jmp_pc);
 }
@@ -32,7 +32,6 @@ make_EHelper(call) {
   // the target address is calculated at the decode stage
   rtl_push(&decinfo.seq_pc);
   rtl_j(decinfo.jmp_pc);
-
 
   print_asm("call %x", decinfo.jmp_pc);
 }
