@@ -51,6 +51,8 @@ make_EHelper(sar);
 
 make_EHelper(pusha);
 make_EHelper(popa);
+make_EHelper(cwtl);
+make_EHelper(cltd);
 
 /*// control.c
 make_EHelper(jmp);
