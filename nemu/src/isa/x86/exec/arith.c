@@ -49,7 +49,7 @@ make_EHelper(sub) { // 参考SBB
   rtl_is_sub_overflow(&s1, &s0, &id_dest->val, &id_src->val, id_dest->width);
   rtl_set_OF(&s1);
 
-  printf("After sub, id_dest->val=%#x\n",id_dest->val);
+  printf("After sub, id_src->val=%#x\n",id_src->val);
 
   print_asm_template2(sub);
 }
