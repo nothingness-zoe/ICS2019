@@ -77,14 +77,14 @@ make_EHelper(cmp) {
 }
 
 make_EHelper(inc) {
-  s1 = 1;
-  rtl_add(&s0, &id_dest->val, &s1);
+  rtl_addi(&s0, &id_dest->val, 1);
   operand_write(id_dest, &s0);
 
   rtl_update_ZFSF(&s0, id_dest->width);
 
   // update OF
-  rtl_is_sub_overflow(&s1, &s0, &id_dest->val, &s1, id_dest->width);
+  rtl_xor(&s1, &id_dest->val, &s0);
+  rtl_msb(&s1, &s1, id_dest->width);
   rtl_set_OF(&s1);
 
   print_asm_template1(inc);
