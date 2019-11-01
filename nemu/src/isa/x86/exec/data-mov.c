@@ -33,6 +33,7 @@ make_EHelper(popa) {
 make_EHelper(leave) {
   rtl_mv(&cpu.esp, &cpu.ebp);
   rtl_pop(&cpu.ebp);
+  printf("cpu.esp: %#x\n", cpu.esp);
 
   print_asm("leave");
 }
