@@ -137,7 +137,9 @@ static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) {
 
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
-  /*switch(width) {
+  printf("src1: %#x\n", *src1);
+
+  switch(width) {
     case 4: *dest = *src1;
       break;
     // 参考 arith.c 中的处理
@@ -146,9 +148,9 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
     case 1: rtl_andi(dest, src1, 0xffffffffu >> ((4 - width) * 8));
       break;
     default: assert(0);
-  }*/
-  printf("src1: %#x\n", *src1);
-  switch(width) {
+  }
+
+  /*switch(width) {
     case 4: *dest = *src1;
       break;
     // 参考 arith.c 中的处理
@@ -163,7 +165,7 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
     }
       break;
     default: assert(0);
-  }
+  }*/
   printf("dest: %#x\n", *dest);
 
 }
