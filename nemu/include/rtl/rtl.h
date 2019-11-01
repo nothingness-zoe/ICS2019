@@ -147,7 +147,7 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
       break;
     default: assert(0);
   }*/
-  printf("src1: %d\n", *src1);
+  printf("src1: %#x\n", *src1);
   switch(width) {
     case 4: *dest = *src1;
       break;
@@ -164,7 +164,7 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
       break;
     default: assert(0);
   }
-  printf("dest: %d\n", *dest);
+  printf("dest: %#x\n", *dest);
 
 }
 
