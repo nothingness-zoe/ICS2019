@@ -101,7 +101,6 @@ make_EHelper(dec) {
   rtl_msb(&s1, &s1, id_dest->width);
   rtl_set_OF(&s1);
 
-
   print_asm_template1(dec);
 }
 
