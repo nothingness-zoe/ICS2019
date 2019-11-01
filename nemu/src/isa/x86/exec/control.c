@@ -13,7 +13,7 @@ make_EHelper(jcc) {
   printf("jcc\n");
   uint32_t cc = decinfo.opcode & 0xf;
   rtl_setcc(&s0, cc);
-  printf("after setcc s0=%d/n", s0);
+  printf("after setcc s0=%d\n", s0);
   rtl_li(&s1, 0);
   rtl_jrelop(RELOP_NE, &s0, &s1, decinfo.jmp_pc);
 
