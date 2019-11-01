@@ -137,22 +137,17 @@ static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) {
 
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
-  int32_t temp = (int32_t)* src1;
+  t0 = (*src1) & (~0u >> ((4-width) << 3));
   switch(width) {
-    case 4: 
+    case 4: *dest = (uint32_t)t0;
       break;
     // 参考 arith.c 中的处理
-    case 2: {
-      temp = temp << 16;
-      temp = temp >> 16;
-    } break;
-    case 1: {
-      temp = temp << 24;
-      temp = temp >> 24;
-    } break;
+    case 2: *dest = (uint32_t)(int16_t)t0;
+      break;
+    case 1: *dest = (uint32_t)(int8_t)t0;
+      break;
     default: assert(0);
   }
-  *dest = temp;
 }
 
 static inline void rtl_setrelopi(uint32_t relop, rtlreg_t *dest,
