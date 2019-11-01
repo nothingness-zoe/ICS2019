@@ -29,6 +29,9 @@ make_EHelper(leave);
 make_EHelper(inc);
 make_EHelper(nop);
 
+// add-longlong.c
+make_EHelper(adc);
+
 // quick-sort.c
 make_EHelper(jmp);
 make_EHelper(dec);
