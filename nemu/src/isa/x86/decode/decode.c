@@ -33,7 +33,7 @@ static inline make_DopHelper(SI) {
    */
 
   // taking into count the size
-  printf("op->width:%d\n", op->width);
+  //printf("op->width:%d\n", op->width);
   if(op->width == 4) {
     op->simm = instr_fetch(pc, op->width);
   }
@@ -280,9 +280,9 @@ make_DHelper(J) {
 }
 
 make_DHelper(push_SI) {
-  printf("in decode_push_I\n");
+  //printf("in decode_push_I\n");
   decode_op_SI(pc, id_dest, true);
-  printf("success decode_push_I\n");
+  //printf("success decode_push_I\n");
 }
 
 make_DHelper(in_I2a) {

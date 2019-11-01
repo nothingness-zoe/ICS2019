@@ -2,7 +2,7 @@
 
 make_EHelper(add) {
   // s0 = dest + src
-  printf("id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
+  //printf("id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
   rtl_add(&s0, &id_dest->val, &id_src->val);
 
   operand_write(id_dest, &s1);
@@ -21,18 +21,18 @@ make_EHelper(add) {
   rtl_is_add_overflow(&s1, &s0, &id_dest->val, &id_src->val, id_dest->width);
   rtl_set_OF(&s1);
   
-  printf("After add, id_src->val=%#x\n",id_src->val);
+  //printf("After add, id_src->val=%#x\n",id_src->val);
 
 
   print_asm_template2(add);
 }
 
 make_EHelper(sub) { // 参考SBB
-  printf("id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
+  //printf("id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
 
   // s0 = dest - src
   rtl_sub(&s0, &id_dest->val, &id_src->val);
-  printf("s0: %#x\n", s0);
+  //printf("s0: %#x\n", s0);
   
   operand_write(id_dest, &s0);
 
@@ -50,7 +50,7 @@ make_EHelper(sub) { // 参考SBB
   rtl_is_sub_overflow(&s1, &s0, &id_dest->val, &id_src->val, id_dest->width);
   rtl_set_OF(&s1);
 
-  printf("After sub, id_dest->reg=%#x\n",id_src->reg);
+  //printf("After sub, id_dest->reg=%#x\n",id_src->reg);
 
   print_asm_template2(sub);
 }
@@ -121,7 +121,7 @@ make_EHelper(neg) {
 
   rtl_is_sub_overflow(&s0, &s1, &id_dest->val, &id_src->val, id_dest->width);
   rtl_set_OF(&s0);
-  
+
   print_asm_template1(neg);
 }
 
