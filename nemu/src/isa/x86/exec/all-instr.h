@@ -50,6 +50,7 @@ make_EHelper(imul1);
 make_EHelper(sar);
 
 make_EHelper(pusha);
+make_EHelper(popa);
 
 /*// control.c
 make_EHelper(jmp);
