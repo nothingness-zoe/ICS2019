@@ -56,26 +56,26 @@ make_EHelper(leave) {
 make_EHelper(cltd) {
   if (decinfo.isa.is_operand_size_16) {
     //TODO();
-    rtl_lr(&s0, cpu.ax, 2);
+    rtl_lr(&s0, R_AX, 2);
     if((int32_t)(int16_t)(uint16_t)s0 < 0) {
       s1 = 0xffff;
-      rtl_sr(cpu.dx, &s1, 2);
+      rtl_sr(R_DX, &s1, 2);
     }
     else {
       s1 = 0;
-      rtl_sr(cpu.dx, &s1, 2);
+      rtl_sr(R_DX, &s1, 2);
     }
   }
   else {
     //TODO();
-    rtl_lr(&s0, cpu.eax, 4);
+    rtl_lr(&s0, R_EAX, 4);
     if((int32_t)s0 < 0) {
       s1 = 0xffffffff;
-      rtl_sr(cpu.edx, &s1, 4);  
+      rtl_sr(R_EDX, &s1, 4);  
     }
     else {
       s1 = 0;
-      rtl_sr(cpu.edx, &s1, 4);
+      rtl_sr(R_EDX, &s1, 4);
     }
   }
 
@@ -85,15 +85,15 @@ make_EHelper(cltd) {
 make_EHelper(cwtl) {
   if (decinfo.isa.is_operand_size_16) {
     //TODO();
-    rtl_lr(&s0, cpu.al, 1);
+    rtl_lr(&s0, R_AL, 1);
     rtl_sext(&s0, &s0, 1);
-    rtl_sr(cpu.ax, &s0, 2);
+    rtl_sr(R_AX, &s0, 2);
   }
   else {
     //TODO();
-    rtl_lr(&s0, cpu.ax, 2);
+    rtl_lr(&s0, R_AX, 2);
     rtl_sext(&s0, &s0, 2);
-    rtl_sr(cpu.eax, &s0, 4);
+    rtl_sr(R_EAX, &s0, 4);
   }
 
   print_asm(decinfo.isa.is_operand_size_16 ? "cbtw" : "cwtl");
