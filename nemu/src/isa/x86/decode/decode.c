@@ -279,7 +279,9 @@ make_DHelper(J) {
 }
 
 make_DHelper(push_SI) {
+  printf("in decode_push_I\n");
   decode_op_SI(pc, id_dest, true);
+  printf("success decode_push_I\n");
 }
 
 make_DHelper(in_I2a) {
