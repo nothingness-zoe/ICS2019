@@ -49,6 +49,8 @@ make_EHelper(neg);
 make_EHelper(imul1);
 make_EHelper(sar);
 
+make_EHelper(pusha);
+
 /*// control.c
 make_EHelper(jmp);
 make_EHelper(jmp_rm);
