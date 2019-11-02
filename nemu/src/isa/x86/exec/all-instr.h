@@ -51,6 +51,7 @@ make_EHelper(sar);
 
 // matrix-mul.c
 make_EHelper(imul2);
+make_EHelper(idiv);
 
 make_EHelper(pusha);
 make_EHelper(popa);
