@@ -2,11 +2,11 @@
 
 make_EHelper(add) {
   // s0 = dest + src
-  //printf("id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
+  printf("id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
   rtl_add(&s0, &id_dest->val, &id_src->val);
-
+  printf("s0: %#x\n", s0);
   operand_write(id_dest, &s0);
-  //printf("id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
+  printf("id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
 
   /*if (id_dest->width != 4) {
     rtl_andi(&s0, &s0, 0xffffffffu >> ((4 - id_dest->width) * 8));
@@ -30,14 +30,14 @@ make_EHelper(add) {
 }
 
 make_EHelper(sub) { // 参考SBB
-  //printf("id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
+  printf("id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
 
   // s0 = dest - src
   rtl_sub(&s0, &id_dest->val, &id_src->val);
-  //printf("s0: %#x\n", s0);
+  printf("s0: %#x\n", s0);
   
   operand_write(id_dest, &s0);
-  //printf("id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
+  printf("id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
 
   if (id_dest->width != 4) {
     rtl_andi(&s0, &s0, 0xffffffffu >> ((4 - id_dest->width) * 8));
