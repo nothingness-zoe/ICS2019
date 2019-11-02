@@ -53,6 +53,9 @@ make_EHelper(sar);
 make_EHelper(imul2);
 make_EHelper(idiv);
 
+// load-store.c
+make_EHelper(movsx);
+
 make_EHelper(pusha);
 make_EHelper(popa);
 make_EHelper(cwtl);
