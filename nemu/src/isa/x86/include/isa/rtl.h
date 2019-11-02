@@ -24,17 +24,23 @@ static inline void rtl_sr(int r, const rtlreg_t* src1, int width) {
 }
 
 static inline void rtl_push(const rtlreg_t* src1) {
+  printf("push cpu.esp:%#x\n", cpu.esp);
   // esp <- esp - 4
   rtl_subi(&cpu.esp, &cpu.esp, 4);
   // M[esp] <- src1
   rtl_sm(&cpu.esp, src1, 4);
+  printf("cpu.esp:%#x\n", cpu.esp);
 }
 
 static inline void rtl_pop(rtlreg_t* dest) {
+  printf("pop cpu.esp:%#x\n", cpu.esp);
+
   // dest <- M[esp]
   rtl_lm(dest, &cpu.esp, 4);
   // esp <- esp + 4
   rtl_addi(&cpu.esp, &cpu.esp, 4);
+  printf("cpu.esp:%#x\n", cpu.esp);
+
 }
 
 static inline void rtl_is_sub_overflow(rtlreg_t* dest,

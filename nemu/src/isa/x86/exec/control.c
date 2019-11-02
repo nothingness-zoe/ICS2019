@@ -41,7 +41,7 @@ make_EHelper(call) {
 make_EHelper(ret) {
   rtl_pop(&decinfo.jmp_pc);
   rtl_j(decinfo.jmp_pc);
-  //printf("cpu.esp: %#x\n", cpu.esp);
+  printf("cpu.esp: %#x\n", cpu.esp);
 
   print_asm("ret");
 }
