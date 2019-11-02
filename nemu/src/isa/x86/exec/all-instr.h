@@ -53,6 +53,7 @@ make_EHelper(pusha);
 make_EHelper(popa);
 make_EHelper(cwtl);
 make_EHelper(cltd);
+make_EHelper(sbb);
 
 /*// control.c
 make_EHelper(jmp);
