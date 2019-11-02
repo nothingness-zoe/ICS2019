@@ -49,6 +49,9 @@ make_EHelper(neg);
 make_EHelper(imul1);
 make_EHelper(sar);
 
+// matrix-mul.c
+make_EHelper(imul2);
+
 make_EHelper(pusha);
 make_EHelper(popa);
 make_EHelper(cwtl);
