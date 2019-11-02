@@ -9,7 +9,11 @@ int printf(const char *fmt, ...) {
   va_start(ap, fmt);
   int n = vsprintf(out, fmt, ap);
   va_end(ap);
-  while(*out) _putc(*out++);
+  //while(*out) _putc(*out++);
+  int len = strlen(out);
+  for(int i=0; i < len; i++) {
+    _putc(out[i]);
+  }
   return n;
 }
 
@@ -50,7 +54,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         }
         else *out++ = 's';
       } break;
-      default: assert(0); break;
+      default: Assert(0, "TODO"); break;
     }
 
   }
