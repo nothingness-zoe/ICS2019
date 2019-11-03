@@ -33,7 +33,7 @@ static void vga_io_handler(uint32_t offset, int len, bool is_write) {
   //TODO();
   if (is_write) {
     //for (; offset < len; offset++)
-      update_screen();
+    update_screen();
   }
 }
 
