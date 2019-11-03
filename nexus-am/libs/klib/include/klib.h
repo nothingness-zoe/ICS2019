@@ -53,7 +53,7 @@ int strcmp(const char* s1, const char* s2);
 int strncmp(const char* s1, const char* s2, size_t n);
 char* strtok(char* s,const char* delim);
 char *strstr(const char *, const char *);
-const hr(const char *s, int c);
+const char* strchr(const char *s, int c);
 
 // stdlib.h
 int atoi(const char* nptr);
