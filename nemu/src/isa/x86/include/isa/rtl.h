@@ -90,8 +90,8 @@ make_rtl_setget_eflags(SF)
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
   printf("update ZF cpu.eax: %#x\n", cpu.eax);
-
-  cpu.eflags.ZF = (*result == 0) ;
+  t0 = *result == 0? 1:0;
+  rtl_set_ZF(&t0);
   printf("cpu.eax: %#x\n", cpu.eax);
 
 }
