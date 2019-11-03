@@ -97,14 +97,15 @@ make_EHelper(shr) {
 make_EHelper(rol) {
   for(int i = 0; i < id_src->val; i++) {
     rtl_shri(&s0, &id_dest->val, id_dest->width*8-1);
-    rtl_shli(&s0, id_dest->val, 1);
+    rtl_shli(&s0, &id_dest->val, 1);
     rtl_xori(&s1, &id_dest->val, s0);
   }
-  rtl_sext(&s0);
+  rtl_set_CF(&s0);
   operand_write(id_dest, &s1);
 
   print_asm_template2(rol);
 }
+
 make_EHelper(setcc) {
   uint32_t cc = decinfo.opcode & 0xf;
 
