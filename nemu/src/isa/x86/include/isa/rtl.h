@@ -91,7 +91,7 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
   printf("update ZF cpu.eax: %#x\n", cpu.eax);
 
-  cpu.eflags.ZF = ((*result) & (~0u >> ((4-width) << 3)))== 0 ;
+  cpu.eflags.ZF = (((*result) & (~0u >> ((4-width) << 3)))== 0) ;
   printf("cpu.eax: %#x\n", cpu.eax);
 
 }
