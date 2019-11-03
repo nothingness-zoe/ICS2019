@@ -102,6 +102,8 @@ static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   printf("update SF cpu.eax: %#x\n", cpu.eax);
 
   rtl_shri(&t0, result, width*8-1);
+  printf("t0:%d\n",t0);
+
   rtl_set_SF(&t0);
   printf("cpu.eax: %#x\n", cpu.eax);
 
