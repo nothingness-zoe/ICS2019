@@ -115,7 +115,7 @@ void* memcpy(void* out, const void* in, size_t n) {
 int memcmp(const void* s1, const void* s2, size_t n){
   char* s1_c = (char*) s1;
   char* s2_c = (char*) s2;
-  /*size_t offset = 0;
+  size_t offset = 0;
   while(offset < n) {
     if (*s1_c == *s2_c) {
       s1_c++;
@@ -126,15 +126,15 @@ int memcmp(const void* s1, const void* s2, size_t n){
     else if (*s1_c < *s2_c) return -1;
     else return 1;
   }
-  return 0;*/
-  while (*s1_c == *s2_c && n--) {
+  return 0;
+  /*while (*s1_c == *s2_c && n--) {
     s1_c++;
     s2_c++;
   }
 
   if (n == -1) return 0;
   else if (*s1_c < *s2_c) return -1;
-  else return 1;
+  else return 1;*/
 }
 
 #endif
