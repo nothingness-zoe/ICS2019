@@ -63,6 +63,7 @@ make_EHelper(cltd);
 make_EHelper(sbb);
 make_EHelper(in);
 make_EHelper(out);
+make_EHelper(mul);
 
 /*// control.c
 make_EHelper(jmp);
