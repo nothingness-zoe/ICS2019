@@ -61,6 +61,8 @@ make_EHelper(popa);
 make_EHelper(cwtl);
 make_EHelper(cltd);
 make_EHelper(sbb);
+make_EHelper(in);
+make_EHelper(out);
 
 /*// control.c
 make_EHelper(jmp);
