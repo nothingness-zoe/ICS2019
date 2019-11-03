@@ -92,7 +92,7 @@ void* memset(void* v,int c,size_t n) {
 }
 
 void* memcpy(void* out, const void* in, size_t n) {
-  char* dst = (char*)out;
+  char* dst = out;
   char* src = (char*)in;
   /*size_t off = 0;
 
