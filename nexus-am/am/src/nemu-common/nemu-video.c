@@ -7,7 +7,7 @@
 #define W 400
 #define H 300
 //#define FPS 32
-static uint32_t fb[W*H] = {};
+//static uint32_t fb[W*H] = {};
 //static uint32_t* const fb __attribute__((used)) = (uint32_t *)0x40000;
 
 size_t __am_video_read(uintptr_t reg, void *buf, size_t size) {
@@ -34,6 +34,7 @@ size_t __am_video_write(uintptr_t reg, void *buf, size_t size) {
         memcpy(&fb[(y + i) * W + x], pixels, cp_bytes);
         pixels += w;
       }*/
+      uint32_t* fb = (uint32_t *)(uintptr_t)FB_ADDR;
       for(int j=0; j<h; j++) {
         for(int i=0; i<w; i++) {
           fb[(y+j)*W+x+i] = pixels[j*w+i];
