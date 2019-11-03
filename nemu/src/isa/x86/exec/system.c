@@ -1,7 +1,10 @@
 #include "cpu/exec.h"
 
 make_EHelper(lidt) {
-  TODO();
+  //TODO();
+  cpu.idtr.limit = vaddr_read(id_dest->addr, 2);
+  cpu.idtr.base = vaddr_read(id_dest->addr+2, 4);
+  if (decinfo.isa.is_operand_size_16) cpu.idtr.base &= 0x00ffffff;
 
   print_asm_template1(lidt);
 }

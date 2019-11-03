@@ -31,6 +31,7 @@ typedef union {
   struct { 
     rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
     vaddr_t pc;
+
     union {
       struct {
         uint32_t CF: 1;
@@ -54,11 +55,12 @@ typedef union {
       };
       uint32_t value;
     } eflags;
+
+    struct {
+      uint16_t limit;
+      uint32_t base;
+    } idtr;
   };
-
-
-
-
 } CPU_state;
 
 static inline int check_reg_index(int index) {

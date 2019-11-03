@@ -67,6 +67,7 @@ make_EHelper(mul);
 make_EHelper(div);
 make_EHelper(imul3);
 make_EHelper(rol);
+make_EHelper(lidt);
 
 /*// control.c
 make_EHelper(jmp);
