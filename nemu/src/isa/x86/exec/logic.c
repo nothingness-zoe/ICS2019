@@ -43,6 +43,7 @@ make_EHelper(xor) {
   
   rtl_update_ZFSF(&s0, id_dest->width);
   //printf("xor id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
+  printf("s0:%#x\n", s0);
   printf("cpu.eax: %#x\n", cpu.eax);
   
   s1 = 0;
