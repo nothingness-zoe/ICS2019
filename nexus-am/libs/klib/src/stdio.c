@@ -18,11 +18,12 @@ int printf(const char *fmt, ...) {
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
+  size_t len = strlen(fmt);
   int is_percent = 0;
   int count = 0;
-  while (*fmt) {
+  for (size_t i=0; i < len; i++) {
     // TODO: my_todo case %b %c %f %o %x 
-    switch(*fmt++) {
+    switch(fmt[i]) {
       case '%': {
         if (is_percent) {
           *out++ = '%';
@@ -54,7 +55,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         }
         else *out++ = 's';
       } break;
-      default: assert(0); break;
+      default: *out++ = fmt[i]; break;
     }
 
   }
