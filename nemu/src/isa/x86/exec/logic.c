@@ -32,6 +32,8 @@ make_EHelper(xor) {
   rtl_xor(&s0, &id_dest->val, &id_src->val);
   operand_write(id_dest, &s0);
   printf("s0: %#x\n", s0);
+  printf("id_dest->reg:%#x\n", id_dest->reg);
+  printf("id_dest->addr:%#x\n", id_dest->addr);
 
   s1 = 0;
   rtl_set_CF(&s1);
