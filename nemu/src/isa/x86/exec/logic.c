@@ -27,28 +27,28 @@ make_EHelper(and) {
 }
 
 make_EHelper(xor) {
-  printf("xor id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
-  printf("id_dest->reg:%#x\n", id_dest->reg);
-  printf("id_dest->addr:%#x\n", id_dest->addr);
+  //printf("xor id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
+  //printf("id_dest->reg:%#x\n", id_dest->reg);
+  //printf("id_dest->addr:%#x\n", id_dest->addr);
   printf("cpu.eax: %#x\n", cpu.eax);
 
   
   rtl_xor(&s0, &id_dest->val, &id_src->val);
   operand_write(id_dest, &s0);
   
-  printf("s0: %#x\n", s0);
-  printf("id_dest->reg:%#x\n", id_dest->reg);
-  printf("id_dest->addr:%#x\n", id_dest->addr);
+  //printf("s0: %#x\n", s0);
+  //printf("id_dest->reg:%#x\n", id_dest->reg);
+  //printf("id_dest->addr:%#x\n", id_dest->addr);
   printf("cpu.eax: %#x\n", cpu.eax);
 
   s1 = 0;
   rtl_set_CF(&s1);
   rtl_set_OF(&s1);
-  printf("cpu.esp: %#x\n", cpu.esp);
+  printf("cpu.eax: %#x\n", cpu.eax);
 
   rtl_update_ZFSF(&s0, id_dest->width);
-  printf("xor id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
-  printf("cpu.esp: %#x\n", cpu.esp);
+  //printf("xor id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
+  printf("cpu.eax: %#x\n", cpu.eax);
 
   print_asm_template2(xor);
 }

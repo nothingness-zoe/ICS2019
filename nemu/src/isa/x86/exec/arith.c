@@ -54,7 +54,7 @@ make_EHelper(sub) { // 参考SBB
   rtl_set_OF(&s1);
 
   //printf("After sub, id_dest->reg=%#x\n",id_src->reg);
-  printf("cpu.esp: %#x\n", cpu.esp);
+  //("cpu.esp: %#x\n", cpu.esp);
 
   print_asm_template2(sub);
 }
