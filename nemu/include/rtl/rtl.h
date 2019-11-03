@@ -17,7 +17,7 @@ bool interpret_relop(uint32_t relop, const rtlreg_t src1, const rtlreg_t src2);
   *dest = imm;
 }
 
-static inline void interpret_rtl_mv(rtlreg_t* dest, const rtlreg_t *src1) {
+ inline void interpret_rtl_mv(rtlreg_t* dest, const rtlreg_t *src1) {
   *dest = *src1;
 }
 
@@ -77,15 +77,15 @@ static inline void interpret_rtl_idiv64_r(rtlreg_t* dest,
   *dest = dividend % divisor;
 }
 
-static inline void interpret_rtl_lm(rtlreg_t *dest, const rtlreg_t* addr, int len) {
+ inline void interpret_rtl_lm(rtlreg_t *dest, const rtlreg_t* addr, int len) {
   *dest = vaddr_read(*addr, len);
 }
 
-static inline void interpret_rtl_sm(const rtlreg_t* addr, const rtlreg_t* src1, int len) {
+ inline void interpret_rtl_sm(const rtlreg_t* addr, const rtlreg_t* src1, int len) {
   vaddr_write(*addr, *src1, len);
 }
 
-static inline void interpret_rtl_host_lm(rtlreg_t* dest, const void *addr, int len) {
+ inline void interpret_rtl_host_lm(rtlreg_t* dest, const void *addr, int len) {
   switch (len) {
     case 4: *dest = *(uint32_t *)addr; return;
     case 1: *dest = *( uint8_t *)addr; return;
@@ -94,7 +94,7 @@ static inline void interpret_rtl_host_lm(rtlreg_t* dest, const void *addr, int l
   }
 }
 
-static inline void interpret_rtl_host_sm(void *addr, const rtlreg_t *src1, int len) {
+ inline void interpret_rtl_host_sm(void *addr, const rtlreg_t *src1, int len) {
   switch (len) {
     case 4: *(uint32_t *)addr = *src1; return;
     case 1: *( uint8_t *)addr = *src1; return;
@@ -108,7 +108,7 @@ static inline void interpret_rtl_setrelop(uint32_t relop, rtlreg_t *dest,
   *dest = interpret_relop(relop, *src1, *src2);
 }
 
-static inline void interpret_rtl_j(vaddr_t target) {
+ inline void interpret_rtl_j(vaddr_t target) {
   cpu.pc = target;
   decinfo_set_jmp(true);
 }
