@@ -54,7 +54,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         }
         else *out++ = 's';
       } break;
-      default: Assert(0, "TODO"); break;
+      default: assert(0); break;
     }
 
   }
