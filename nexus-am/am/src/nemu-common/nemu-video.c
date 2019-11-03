@@ -4,10 +4,10 @@
 #include <klib.h>
 
 #define SCREEN_PORT 0x100
-//#define W 400
-//#define H 300
+#define W 400
+#define H 300
 //#define FPS 32
-static uint32_t FB[0x40000] = {};
+static uint32_t FB[W*H] = {};
 
 size_t __am_video_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
@@ -26,14 +26,17 @@ size_t __am_video_write(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_VIDEO_FBCTL: {
       _DEV_VIDEO_FBCTL_t *ctl = (_DEV_VIDEO_FBCTL_t *)buf;
-      int W = screen_width();
-      int H = screen_height();
       int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
       uint32_t *pixels = ctl->pixels;
-      int cp_bytes = sizeof(uint32_t) * (w < W-x ? w : W-x);
+      /*int cp_bytes = sizeof(uint32_t) * (w < W-x ? w : W-x);
       for (int i = 0; i < h && y + i < H; i ++) {
         memcpy(&FB[(y + i) * W + x], pixels, cp_bytes);
         pixels += w;
+      }*/
+      for(int j=0; j<h; j++) {
+        for(int i=0; i<w; i++) {
+          FB[(y+j)*W+x+i] = pixels[j*w+i];
+        }
       }
       if (ctl->sync) {
         //outl(SYNC_ADDR, 0);
