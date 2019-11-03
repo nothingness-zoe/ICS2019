@@ -30,7 +30,7 @@ char* strncpy(char* dst, const char* src, size_t n) {
   char* r = dst;
   size_t off = 0;
 
-  if (strlen(src) < n) { // 如果src长度小于len，就在后面补充\0
+  if (strlen(src) < n) { 
     off = n - strlen(src);
     n = strlen(src);
   }
@@ -96,7 +96,7 @@ void* memcpy(void* out, const void* in, size_t n) {
   char* src = (char*)in;
   size_t off = 0;
 
-  if (strlen(src) < n) { // 如果src长度小于len，就在后面补充\0
+  if (strlen(src) < n) { 
     off = n - strlen(src);
     n = strlen(src);
   }
