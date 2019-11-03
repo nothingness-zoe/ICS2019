@@ -6,7 +6,7 @@
 #define SCREEN_PORT 0x100
 #define W 400
 #define H 300
-#define FPS 32
+//#define FPS 32
 static uint32_t FB[W * H] = {};
 
 size_t __am_video_read(uintptr_t reg, void *buf, size_t size) {
