@@ -40,15 +40,17 @@ make_EHelper(xor) {
   //printf("id_dest->reg:%#x\n", id_dest->reg);
   //printf("id_dest->addr:%#x\n", id_dest->addr);
   printf("cpu.eax: %#x\n", cpu.eax);
-
+  
+  rtl_update_ZFSF(&s0, id_dest->width);
+  //printf("xor id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
+  printf("cpu.eax: %#x\n", cpu.eax);
+  
   s1 = 0;
   rtl_set_CF(&s1);
   rtl_set_OF(&s1);
   printf("cpu.eax: %#x\n", cpu.eax);
 
-  rtl_update_ZFSF(&s0, id_dest->width);
-  //printf("xor id_dest->val= %#x, id_src_val=%#x\n", id_dest->val, id_src->val);
-  printf("cpu.eax: %#x\n", cpu.eax);
+
 
   print_asm_template2(xor);
 }
