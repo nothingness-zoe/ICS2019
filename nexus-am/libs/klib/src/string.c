@@ -99,16 +99,22 @@ void* memcpy(void* out, const void* in, size_t n) {
   if (strlen(src) < n) { 
     off = n - strlen(src);
     n = strlen(src);
-  }*/
+  }
 
   while (n--){
     *dst++ = *src++;
   }
 
-  /*while (off--) {
+  while (off--) {
     *dst++ = '\0';
   }*/
-
+  size_t offset = 0;
+  while(offset < n) {
+    *dst = *src;
+    dst++;
+    src++;
+    offset++;
+  }
   return out;
 }
 
