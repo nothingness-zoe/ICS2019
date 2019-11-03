@@ -117,10 +117,11 @@ int memcmp(const void* s1, const void* s2, size_t n){
   char* s2_c = (char*) s2;
 
   while (*s1_c == *s2_c && n--) {
-    if (*s1_c == '\0') return 0;
     s1_c++;
     s2_c++;
   }
+
+  if (*s1_c == *s2_c) return 0;
 
   return *s1_c - *s2_c;
 }
