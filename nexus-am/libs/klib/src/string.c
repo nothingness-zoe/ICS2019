@@ -61,7 +61,7 @@ char* strcat(char* dst, const char* src) {
 }
 
 int strcmp(const char* s1, const char* s2) {
-  _putc('s'); _putc('c'); _putc('m'); _putc('p');
+  //_putc('s'); _putc('c'); _putc('m'); _putc('p');
 
   while (*s1 == *s2) {
     if (*s1 == '\0') return 0;
