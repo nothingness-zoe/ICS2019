@@ -4,8 +4,8 @@
 #include <klib.h>
 
 #define SCREEN_PORT 0x100
-#define W 400
-#define H 300
+//#define W 400
+//#define H 300
 //#define FPS 32
 //static uint32_t FB[W * H] = {};
 
@@ -13,8 +13,9 @@ size_t __am_video_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_VIDEO_INFO: {
       _DEV_VIDEO_INFO_t *info = (_DEV_VIDEO_INFO_t *)buf;
-      info->width = W;
-      info->height = H;
+      uint32_t screen = inl(SCREEN_PORT);
+      info->width = (screen >> 16) & 0xffff;
+      info->height = screen & 0xffff;
       return sizeof(_DEV_VIDEO_INFO_t);
     }
   }
