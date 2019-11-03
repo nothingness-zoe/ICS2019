@@ -22,7 +22,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
   int count = 0;
   while (*fmt) {
     // TODO: my_todo case %b %c %f %o %x 
-    switch(*fmt) {
+    switch(*fmt++) {
       case '%': {
         if (is_percent) {
           *out++ = '%';
