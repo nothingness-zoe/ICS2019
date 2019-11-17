@@ -18,6 +18,8 @@ static void restart() {
   cpu.pc = PC_START;
 
   cpu.eflags.value = 0x2;
+
+  cpu.cs = 8;
 }
 
 void init_isa(void) {

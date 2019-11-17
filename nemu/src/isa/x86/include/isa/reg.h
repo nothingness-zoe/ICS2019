@@ -56,6 +56,8 @@ typedef union {
       uint32_t value;
     } eflags;
 
+    uint32_t cs;
+    
     struct {
       uint16_t limit;
       uint32_t base;
