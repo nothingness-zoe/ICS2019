@@ -53,11 +53,11 @@ typedef union {
         uint32_t VM: 1;
         uint32_t   : 14;
       };
-      uint32_t value;
-    } eflags;
-
-    uint32_t cs;
+      uint32_t eflags;
+    }; 
     
+    uint32_t cs;
+
     struct {
       uint16_t limit;
       uint32_t base;
