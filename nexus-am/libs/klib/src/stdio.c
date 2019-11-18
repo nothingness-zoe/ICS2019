@@ -23,11 +23,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
   int count = 0;
   
   while (*fmt) {
-    if (*fmt != '%') {
-      *out++ = *fmt++;
-      count++;
-    }
-    else {
+    if(*fmt == '%') {
       char op = *fmt++;
       while ('0' <= op && op <= '9') op = *fmt++;
       switch (op) {
@@ -47,9 +43,11 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
             num = -num;
           }
           if (num == 0) *out++ = '0';
-          while (num) {
+          else {
+            while (num) {
             buf[i++] = num%10 +'0';
             num /= 10;
+            }
           }
           while(i) {
             *out++ = buf[i--];
@@ -58,6 +56,11 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         } break;
         default: _putc('n'); break;
       }
+      fmt++;
+    }
+    else {
+      *out++ = *fmt++;
+      count++;
     }
   }
 
