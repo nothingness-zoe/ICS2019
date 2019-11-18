@@ -24,6 +24,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
   
   while (*fmt) {
     if(*fmt == '%') {
+      fmt++;
       char op = *fmt++;
       while ('0' <= op && op <= '9') op = *fmt++;
       switch (op) {
@@ -56,7 +57,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         } break;
         default: _putc('n'); break;
       }
-      fmt++;
     }
     else {
       *out++ = *fmt++;
