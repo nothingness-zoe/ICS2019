@@ -18,13 +18,49 @@ int printf(const char *fmt, ...) {
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
-  size_t len = strlen(fmt);
-  int is_percent = 0;
+  //size_t len = strlen(fmt);
+  //int is_percent = 0;
   int count = 0;
   
-  //while ()
+  while (*fmt) {
+    if (*fmt != '%') {
+      *out++ = *fmt++;
+      count++;
+      continue;
+    }
+    char op = *fmt++;
+    while ('0' <= op && op <= '9') op = *fmt++;
+    switch (op) {
+      case 's': {
+        char *str = va_arg(ap, char*);
+        while (*str) {
+          *out++ = *str++;
+          count++;
+        }
+      } break;
+      case 'd': {
+        int num = va_arg(ap, int);
+        char buf[128];
+        int i=0;
+        if (num < 0) {
+          *out++ = '-';
+          num = -num;
+        }
+        if (num == 0) *out++ = '0';
+        while (num) {
+          buf[i++] = num%10 +'0';
+          num /= 10;
+        }
+        while(i) {
+          *out++ = buf[i--];
+          count++;
+        }
+      } break;
+      default: _putc('n'); break;
+    }
+  }
 
-  //*
+  /*
   for (size_t i=0; i < len; i++) {
     // TODO: my_todo case %b %c %f %o %x 
     switch(fmt[i]) {
