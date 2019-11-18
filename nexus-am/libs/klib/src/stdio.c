@@ -21,6 +21,10 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
   size_t len = strlen(fmt);
   int is_percent = 0;
   int count = 0;
+  
+  //while ()
+
+  //*
   for (size_t i=0; i < len; i++) {
     // TODO: my_todo case %b %c %f %o %x 
     switch(fmt[i]) {
@@ -59,6 +63,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     }
 
   }
+  //*/
   *out = '\0';
   return count;
 }
