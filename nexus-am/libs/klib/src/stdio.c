@@ -90,7 +90,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           while(i) {
             *out++ = buf[i--];
             count++;
-          }
+          } break;
         }
         default: _putc(op); _putc('\n'); break;
       }
