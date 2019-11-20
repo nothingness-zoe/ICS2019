@@ -88,13 +88,15 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
             num /= 16;
             i++;
           } while(num);
+          buf[i] = '\0';
           _putc('1'); _putc('\n');
           *out++ = '0';
           count++;
           *out++ = 'x';
           count++;
           while(i) {
-            *out++ = buf[i--];
+            *out++ = buf[i-1];
+            i--;
             count++;
           } break;
         }
