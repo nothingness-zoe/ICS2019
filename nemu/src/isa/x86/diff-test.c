@@ -23,6 +23,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
       printf("diff:\ncpu.edi=%#x,ref.edi=%#x\n", cpu.edi,ref_r->eax);
     /*if (ref_r->pc != pc)
       printf("diff:\npc=%#x,ref.pc=%#x\n", pc,ref_r->pc);*/
+    printf("position: %#x\n", cpu.pc);
     return false;
   }
     
