@@ -38,6 +38,7 @@ make_EHelper(pusha) {
 make_EHelper(popa) {
   //TODO();
   printf("popa cpu.esp: %#x\n", cpu.esp);
+  printf("popa cpu.pc: %#x\n", cpu.pc);
   rtl_pop(&cpu.edi);
   rtl_pop(&cpu.esi);
   rtl_pop(&cpu.ebp);
