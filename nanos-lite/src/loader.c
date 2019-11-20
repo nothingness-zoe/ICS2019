@@ -12,7 +12,7 @@
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   // TODO();
-  ramdisk_read((void *)DEFAULT_ENTRY, 0, get_ramdisk_size());
+  ramdisk_read((void *)DEFAULT_ENTRY, 0x100000, get_ramdisk_size());
   return (uintptr_t)DEFAULT_ENTRY;
 }
 
