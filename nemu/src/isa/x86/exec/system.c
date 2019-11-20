@@ -4,7 +4,7 @@ void raise_intr(uint32_t NO, vaddr_t ret_addr);
 
 make_EHelper(lidt) {
   //TODO();
-  printf("lidt cpu.esp: %#x\n", cpu.esp);
+  //printf("lidt cpu.esp: %#x\n", cpu.esp);
   if (decinfo.isa.is_operand_size_16) {
     cpu.idtr.limit = vaddr_read(id_dest->addr, 2);
     cpu.idtr.base = vaddr_read(id_dest->addr+2, 4)&0x00ffffff;
@@ -13,7 +13,7 @@ make_EHelper(lidt) {
     cpu.idtr.limit = vaddr_read(id_dest->addr, 2);
     cpu.idtr.base = vaddr_read(id_dest->addr+2, 4);
   }
-  printf("lidt cpu.esp: %#x\n", cpu.esp);
+  //printf("lidt cpu.esp: %#x\n", cpu.esp);
   print_asm_template1(lidt);
 }
 
@@ -33,10 +33,10 @@ make_EHelper(mov_cr2r) {
 
 make_EHelper(int) {
   //TODO();
-  printf("int cpu.esp: %#x\n", cpu.esp);
+  //printf("int cpu.esp: %#x\n", cpu.esp);
 
   raise_intr(id_dest->val, decinfo.seq_pc);
-  printf("int cpu.esp: %#x\n", cpu.esp);
+  //printf("int cpu.esp: %#x\n", cpu.esp);
 
   print_asm("int %s", id_dest->str);
 
