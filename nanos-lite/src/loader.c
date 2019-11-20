@@ -8,12 +8,12 @@
 # define Elf_Ehdr Elf32_Ehdr
 # define Elf_Phdr Elf32_Phdr
 #endif
+# define DEFAULT_ENTRY 0x3000000
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   // TODO();
-  uintptr_t* entry;
-  ramdisk_read(entry, 0, get_ramdisk_size());
-  return entry;
+  ramdisk_read((void *)DEFAULT_ENTRY, 0, get_ramdisk_size());
+  return (uintptr_t)DEFAULT_ENTRY;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
