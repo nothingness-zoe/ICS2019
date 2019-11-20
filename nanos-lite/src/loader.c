@@ -10,8 +10,10 @@
 #endif
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  TODO();
-  return 0;
+  // TODO();
+  uintptr_t* entry;
+  ramdisk_read(entry, 0, get_ramdisk_size());
+  return entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
