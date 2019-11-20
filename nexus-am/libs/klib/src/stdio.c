@@ -80,6 +80,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           char buf[128];
           int i = 0;
           int mod = 0;
+          _putc('0'); _putc('\n');
           do {
             mod = num%16;
             if (mod <= 9) buf[i] = mod+'0';
@@ -87,6 +88,11 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
             num /= 16;
             i++;
           } while(num);
+          _putc('1'); _putc('\n');
+          *out++ = '0';
+          count++;
+          *out++ = 'x';
+          count++;
           while(i) {
             *out++ = buf[i--];
             count++;
