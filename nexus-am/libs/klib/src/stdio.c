@@ -58,29 +58,13 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
             count++;
           }
         } break;
-        case 'p': {
-          int num = va_arg(ap, int);
-          char buf[128];
-          int i = 0;
-          int mod = 0;
-          do {
-            mod = num%16;
-            if (mod <= 9) buf[i] = mod+'0';
-            else buf[i] = mod+('A'-10);
-            num /= 16;
-            i++;
-          } while(num);
-          while(i) {
-            *out++ = buf[i--];
-            count++;
-          }
-        } break;
+        case 'p': 
         case 'x': {
           int num = va_arg(ap, int);
           char buf[128];
           int i = 0;
           int mod = 0;
-          _putc('0'); _putc('\n');
+          // _putc('0'); _putc('\n');
           do {
             mod = num%16;
             if (mod <= 9) buf[i] = mod+'0';
@@ -89,7 +73,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
             i++;
           } while(num);
           buf[i] = '\0';
-          _putc('1'); _putc('\n');
+          // _putc('1'); _putc('\n');
           *out++ = '0';
           count++;
           *out++ = 'x';
