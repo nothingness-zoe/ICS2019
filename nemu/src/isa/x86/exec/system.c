@@ -33,8 +33,10 @@ make_EHelper(mov_cr2r) {
 
 make_EHelper(int) {
   //TODO();
+  printf("int cpu.esp: %#x\n", cpu.esp);
 
   raise_intr(id_dest->val, decinfo.seq_pc);
+  printf("int cpu.esp: %#x\n", cpu.esp);
 
   print_asm("int %s", id_dest->str);
 
