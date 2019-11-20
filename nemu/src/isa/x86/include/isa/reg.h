@@ -53,10 +53,10 @@ typedef union {
         uint32_t VM: 1;
         uint32_t   : 14;
       };
-      uint32_t value;
+      rtlreg_t value;
     }eflags; 
 
-    uint32_t cs;
+    rtlreg_t cs;
 
     struct {
       uint16_t limit;
