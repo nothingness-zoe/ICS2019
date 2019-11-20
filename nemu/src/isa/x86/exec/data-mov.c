@@ -48,6 +48,7 @@ make_EHelper(popa) {
   rtl_pop(&cpu.ecx);
   rtl_pop(&cpu.eax);
   printf("popa cpu.esp: %#x\n", cpu.esp);
+  printf("popa cpu.pc: %#x\n", cpu.pc);
   
   print_asm("popa");
 }
