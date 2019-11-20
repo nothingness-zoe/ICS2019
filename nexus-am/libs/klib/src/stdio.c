@@ -64,7 +64,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           int i = 0;
           int mod = 0;
           do {
-            mod = num%10;
+            mod = num%16;
             if (mod <= 9) buf[i] = mod+'0';
             else buf[i] = mod+('A'-10);
             num /= 16;
@@ -81,7 +81,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           int i = 0;
           int mod = 0;
           do {
-            mod = num%10;
+            mod = num%16;
             if (mod <= 9) buf[i] = mod+'0';
             else buf[i] = mod+('A'-10);
             num /= 16;
