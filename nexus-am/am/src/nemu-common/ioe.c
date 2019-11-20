@@ -5,9 +5,9 @@ void __am_vga_init();
 void __am_timer_init();
 
 int _ioe_init() {
-  _putc('i');
+  //_putc('i');
   __am_vga_init();
-  _putc('v');
+  //_putc('v');
   __am_timer_init();
   return 0;
 }
