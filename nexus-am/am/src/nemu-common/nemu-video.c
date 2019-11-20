@@ -6,7 +6,7 @@
 #define SCREEN_PORT 0x100
 #define W 400
 #define H 300
-#define FPS 32
+//#define FPS 32
 //static uint32_t FB[W*H] = {};
 //static uint32_t* const fb __attribute__((used)) = (uint32_t *)0x40000;
 
