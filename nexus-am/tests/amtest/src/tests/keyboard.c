@@ -18,8 +18,8 @@ void keyboard_test() {
       key ^= 0x8000;
       down = 1;
     }
-    _putc('s');
     if (key != _KEY_NONE) {
+      //_putc('s');
       printf("Get key: %d %s %s\n", key, names[key], down ? "down" : "up");
     }
   }
