@@ -15,6 +15,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   printf("remdisk_size: %x\n", get_ramdisk_size());
   ramdisk_read((void *)DEFAULT_ENTRY, 0x1000, get_ramdisk_size()-0x1000);
   // ramdisk_read((void *)DEFAULT_ENTRY, 0x1000, 0x28f3-0x1000);
+  printf("entry: %x\n", (uintptr_t)DEFAULT_ENTRY);
   printf("success\n");
   return (uintptr_t)DEFAULT_ENTRY;
 }
