@@ -21,8 +21,10 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
   //size_t len = strlen(fmt);
   //int is_percent = 0;
   int count = 0;
+  int have_head = 0;
   
   while (*fmt) {
+    have_head = 0;
     if(*fmt == '%') {
       char op = *++fmt;
       while ('0' <= op && op <= '9') op = *++fmt;
@@ -58,7 +60,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
             count++;
           }
         } break;
-        case 'p': 
+        case 'p': have_head=1;
         case 'x': {
           int num = va_arg(ap, int);
           char buf[128];
@@ -74,10 +76,12 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           } while(num);
           buf[i] = '\0';
           // _putc('1'); _putc('\n');
-          *out++ = '0';
-          count++;
-          *out++ = 'x';
-          count++;
+          if (have_head) {
+            *out++ = '0';
+            count++;
+            *out++ = 'x';
+            count++;
+          }
           while(i) {
             *out++ = buf[i-1];
             i--;
