@@ -5,11 +5,15 @@ uintptr_t sys_write(uintptr_t fd, void* buf, uintptr_t count) {
   uintptr_t count_write = 0;
   if (fd == 1 || fd == 2) {
     char * out = (char *)buf;
-    while (*out && count--) {
-      _putc(*out);
-      out++;
-      count_write++;
+    // while (*out && count--) {
+    //   _putc(*out);
+    //   out++;
+    //   count_write++;
+    // }
+    for (int i=0; i < count; i++) {
+      _putc(out[i]);
     }
+    count_write = count;
   }
   return count_write;
 }
