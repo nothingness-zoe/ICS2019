@@ -2,6 +2,7 @@
 #include "syscall.h"
 
 uintptr_t sys_write(uintptr_t fd, void* buf, uintptr_t count) {
+  _putc('s'); _putc('\n');
   uintptr_t count_write = 0;
   if (fd == 1 || fd == 2) {
     char * out = (char *)buf;
