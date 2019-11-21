@@ -1,12 +1,13 @@
 #include "common.h"
 #include "syscall.h"
 
-uintptr_t sys_write(uintptr_t fd, const void* buf, uintptr_t count) {
+uintptr_t sys_write(uintptr_t fd, void* buf, uintptr_t count) {
   uintptr_t count_write = 0;
   if (fd == 1 || fd == 2) {
-    while (*buf && count--) {
-      _putc(*(char*)buf);
-      buf++;
+    char * out = (char *)buf;
+    while (*out && count--) {
+      _putc(*out);
+      out++;
       count_write++;
     }
   }
@@ -23,7 +24,7 @@ _Context* do_syscall(_Context *c) {
   switch (a[0]) {
     case SYS_exit: _halt(a[1]); break;
     case SYS_yield: _yield(); c->GPRx = 0; break;
-    case SYS_write: c->GPRx = sys_write(a[1], a[2], a[3]); break;
+    case SYS_write: c->GPRx = sys_write(a[1], (void*)a[2], a[3]); break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
