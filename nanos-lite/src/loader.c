@@ -15,7 +15,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   printf("remdisk_size: %x\n", get_ramdisk_size());
   ramdisk_read((void *)DEFAULT_ENTRY, 0x1000, get_ramdisk_size()-0x1000);
   // ramdisk_read((void *)DEFAULT_ENTRY, 0x1000, 0x28f3-0x1000);
-  printf("success");
+  printf("success\n");
   return (uintptr_t)DEFAULT_ENTRY;
 }
 
@@ -23,6 +23,7 @@ void naive_uload(PCB *pcb, const char *filename) {
   uintptr_t entry = loader(pcb, filename);
   Log("Jump to entry = %x", entry);
   ((void(*)())entry) ();
+  printf("naive_uload success\n");
 }
 
 void context_kload(PCB *pcb, void *entry) {
