@@ -16,6 +16,7 @@ uintptr_t sys_write(uintptr_t fd, void* buf, uintptr_t count) {
     }
     count_write = count;
   }
+  Log("1 time");
   return count_write;
 }
 
