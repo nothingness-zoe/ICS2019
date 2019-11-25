@@ -7,7 +7,7 @@ typedef struct {
   char *name;
   size_t size;
   size_t disk_offset;
-  off_t open_offset;
+  //off_t open_offset;
   ReadFn read;
   WriteFn write;
 } Finfo;
@@ -38,24 +38,24 @@ void init_fs() {
   // TODO: initialize the size of /dev/fb
 }
 
-int fs_open (const char *pathname, int flags, int mode){
-  for (int i=0, i < NR_FILES; i++) {
-    if (strcmp(file_table[i].name, pathname) == 0) {
-      printf("%s\n", pathname);
-      return i;
-    }
-  }
-  printf("assert: %s\n", pathname);
-  assert(0);
-  return 0;
-}
+// int fs_open (const char *pathname, int flags, int mode){
+//   for (int i=0, i < NR_FILES; i++) {
+//     if (strcmp(file_table[i].name, pathname) == 0) {
+//       printf("%s\n", pathname);
+//       return i;
+//     }
+//   }
+//   printf("assert: %s\n", pathname);
+//   assert(0);
+//   return 0;
+// }
 
-ssize_t fs_read(int fd, void * buf, size_t len);
+// ssize_t fs_read(int fd, void * buf, size_t len);
 
-ssize_t fs_write(int fd, const void * buf, size_t len);
+// ssize_t fs_write(int fd, const void * buf, size_t len);
 
-off_t fs_lseek (int fd, off_t offset, int whence);
+// off_t fs_lseek (int fd, off_t offset, int whence);
 
-ssize_t fs_close(int fd) { 
-  return 0;
-}
+// ssize_t fs_close(int fd) { 
+//   return 0;
+// }
