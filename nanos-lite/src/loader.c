@@ -20,7 +20,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   // printf("success\n");
   // return (uintptr_t)DEFAULT_ENTRY;
 
-  Elf_Ehdr ehdr;
+  // Elf_Ehdr ehdr;
   // ramdisk_read(&ehdr, 0, sizeof(ehdr));
 
   // for (int i=0; i < ehdr.e_phnum; i++) {
