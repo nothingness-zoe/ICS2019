@@ -6,8 +6,8 @@ typedef size_t (*WriteFn) (const void *buf, size_t offset, size_t len);
 typedef struct {
   char *name;
   size_t size;
-  off_t disk_offset;
-  off_t open_offset;
+  size_t disk_offset;
+  size_t open_offset;
   ReadFn read;
   WriteFn write;
 } Finfo;
@@ -26,9 +26,9 @@ size_t invalid_write(const void *buf, size_t offset, size_t len) {
 
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
-  {"stdin", 0, 0, invalid_read, invalid_write},
-  {"stdout", 0, 0, invalid_read, serial_write},
-  {"stderr", 0, 0, invalid_read, serial_write},
+  {"stdin", 0, 0, 0, invalid_read, invalid_write},
+  {"stdout", 0, 0, 0, invalid_read, serial_write},
+  {"stderr", 0, 0, 0, invalid_read, serial_write},
 #include "files.h"
 };
 
@@ -55,7 +55,7 @@ int fs_open (const char *pathname, int flags, int mode){
   return 0;
 }
 
-ssize_t fs_read(int fd, void * buf, size_t len) {
+size_t fs_read(int fd, void * buf, size_t len) {
   if (file_table[fd].read == NULL) {
     size_t aval_size = fs_filesz(fd) - file_table[fd].open_offset;
     if (aval_size < len) len = aval_size;
@@ -63,12 +63,10 @@ ssize_t fs_read(int fd, void * buf, size_t len) {
     file_table[fd].open_offset += len;
     return len;
   }
-  // else {
-
-  // }
+  else return -1;
 }
 
-ssize_t fs_write(int fd, const void * buf, size_t len) {
+size_t fs_write(int fd, const void * buf, size_t len) {
   if (file_table[fd].write == NULL) { 
     size_t aval_size = fs_filesz(fd) - file_table[fd].open_offset;
     if (aval_size < len) len = aval_size;
@@ -76,9 +74,10 @@ ssize_t fs_write(int fd, const void * buf, size_t len) {
     file_table[fd].open_offset += len;
     return len;
   }
+  else return -1;
 }
 
-off_t fs_lseek (int fd, off_t offset, int whence) {
+size_t fs_lseek (int fd, size_t offset, int whence) {
   size_t size = fs_filesz(fd);
   switch (whence) {
     case SEEK_SET: {
@@ -102,6 +101,6 @@ off_t fs_lseek (int fd, off_t offset, int whence) {
   }
 }
 
-ssize_t fs_close(int fd) { 
+int fs_close(int fd) { 
   return 0;
 }
