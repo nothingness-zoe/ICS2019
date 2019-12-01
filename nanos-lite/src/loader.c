@@ -35,8 +35,11 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   // return ehdr.e_entry;
 
   int fd = fs_open(filename, 0, 0);
+  printf("open\n");
   size_t size = fs_filesz(fd);
+  printf("size\n");
   fs_read(fd, (void*)DEFAULT_ENTRY, size);
+  printf("read\n");
   fs_close(fd);
   return DEFAULT_ENTRY;
 }
