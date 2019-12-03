@@ -30,7 +30,7 @@ _Context* do_syscall(_Context *c) {
   switch (a[0]) {
     case SYS_exit: _halt(a[1]); break;
     case SYS_yield: _yield(); c->GPRx = 0; break;
-    case SYS_write: c->GPRx = fs_write(a[1], (void*)a[2], a[3]); break;
+    case SYS_write: c->GPRx = sys_write(a[1], (void*)a[2], a[3]); break;
     case SYS_brk: c->GPRx = 0; break; // TODO: sys_brk()
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
