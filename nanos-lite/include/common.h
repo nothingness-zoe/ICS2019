@@ -29,9 +29,11 @@ int fs_close(int fd);
 int screen_width();
 int screen_height();
 void draw_rect(uint32_t *pixels, int x, int y, int w, int h);
+void draw_sync();
 
 size_t serial_write(const void *buf, size_t offset, size_t len);
 size_t events_read(void *buf, size_t offset, size_t len);
 size_t fb_write(const void *buf, size_t offset, size_t len);
+size_t fbsync_write(const void *buf, size_t offset, size_t len);
 
 #endif
