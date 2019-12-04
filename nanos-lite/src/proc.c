@@ -32,3 +32,7 @@ void init_proc() {
 _Context* schedule(_Context *prev) {
   return NULL;
 }
+
+void sys_execve(const char * filename) {
+  naive_uload(NULL, filename);
+}

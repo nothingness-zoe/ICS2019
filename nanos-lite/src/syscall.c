@@ -1,8 +1,6 @@
 #include "common.h"
 #include "syscall.h"
 
-void naive_uload(PCB *pcb, const char *filename);
-
 uintptr_t sys_write(uintptr_t fd, void* buf, uintptr_t count) {
   // _putc('w'); _putc('\n');
   uintptr_t count_write = 0;
@@ -20,10 +18,6 @@ uintptr_t sys_write(uintptr_t fd, void* buf, uintptr_t count) {
   }
   Log("1 time");
   return count_write;
-}
-
-void sys_execve(const char * filename) {
-  naive_uload(NULL, filename);
 }
 
 _Context* do_syscall(_Context *c) {
