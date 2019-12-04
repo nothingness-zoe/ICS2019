@@ -1,6 +1,8 @@
 #include "common.h"
 #include "syscall.h"
 
+void naive_uload(PCB *pcb, const char *filename);
+
 uintptr_t sys_write(uintptr_t fd, void* buf, uintptr_t count) {
   // _putc('w'); _putc('\n');
   uintptr_t count_write = 0;
