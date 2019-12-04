@@ -37,13 +37,13 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 static char dispinfo[128] __attribute__((used)) = {};
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  memset(buf, dispinfo+offset, len);
+  memcpy(buf, dispinfo+offset, len);
   return len;
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
   int width = screen_width();
-  int height = screen_height();
+  // int height = screen_height();
   offset /= 4;
   int x = offset % width;
   int y = offset / width;
