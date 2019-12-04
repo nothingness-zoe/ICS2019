@@ -9,7 +9,6 @@
 # define Elf_Phdr Elf32_Phdr
 #endif
 // # define DEFAULT_ENTRY 0x3000000
-# define DEFAULT_ENTRY 0x300105c
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   // TODO();
@@ -47,14 +46,29 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 
   // return ehdr.e_entry;
 
-  int fd = fs_open(filename, 0, 0);
-  // printf("open: %d\n", fd);
-  size_t size = fs_filesz(fd);
-  // printf("size:%d\n", size);
-  fs_read(fd, (void*)DEFAULT_ENTRY, size);
-  // printf("read\n");
-  fs_close(fd);
-  return DEFAULT_ENTRY;
+  // int fd = fs_open(filename, 0, 0);
+  // // printf("open: %d\n", fd);
+  // size_t size = fs_filesz(fd);
+  // // printf("size:%d\n", size);
+  // fs_read(fd, (void*)DEFAULT_ENTRY, size);
+  // // printf("read\n");
+  // fs_close(fd);
+  // return DEFAULT_ENTRY;
+
+  Elf_Ehdr ehdr;
+  ramdisk_read(&ehdr, 0, sizeof(ehdr));
+
+  for (int i=0; i < ehdr.e_phnum; i++) {
+    Elf_Phdr phdr;
+    ramdisk_read(&phdr, ehdr.e_phoff + i*ehdr.e_phentsize, ehdr.e_phentsize);
+    if (phdr.p_type == PT_LOAD) {
+      int fd = fs_open(filename, 0, 0);
+      fs_read(fd, (void*)phdr.p_vaddr, phdr.p_filesz);
+      memset((void*)(phdr.p_vaddr + phdr.p_filesz), 0, phdr.p_memsz - phdr.p_filesz);
+    }
+  }
+  
+  return ehdr.e_entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
