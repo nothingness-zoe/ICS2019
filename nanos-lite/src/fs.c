@@ -29,6 +29,7 @@ static Finfo file_table[] __attribute__((used)) = {
   {"stdin", 0, 0, 0, invalid_read, invalid_write},
   {"stdout", 0, 0, 0, invalid_read, serial_write},
   {"stderr", 0, 0, 0, invalid_read, serial_write},
+  {"/dev/events", 0, 0, 0, events_read, NULL},
 #include "files.h"
 };
 
@@ -55,26 +56,26 @@ int fs_open (const char *pathname, int flags, int mode){
 }
 
 size_t fs_read(int fd, void * buf, size_t len) {
-  //if (file_table[fd].read == NULL) {
+  if (file_table[fd].read == NULL) {
     size_t aval_size = fs_filesz(fd) - file_table[fd].open_offset;
     if (aval_size < len) len = aval_size;
     printf("disk_offset: %d\n",file_table[fd].disk_offset);
     ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
     file_table[fd].open_offset += len;
     return len;
-  //}
-  //else return -1;
+  }
+  else return -1;
 }
 
 size_t fs_write(int fd, const void * buf, size_t len) {
-  //if (file_table[fd].write == NULL) { 
+  if (file_table[fd].write == NULL) { 
     size_t aval_size = fs_filesz(fd) - file_table[fd].open_offset;
     if (aval_size < len) len = aval_size;
     ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
     file_table[fd].open_offset += len;
     return len;
-  //}
-  //else return -1;
+  }
+  else return -1;
 }
 
 size_t fs_lseek (int fd, size_t offset, int whence) {
