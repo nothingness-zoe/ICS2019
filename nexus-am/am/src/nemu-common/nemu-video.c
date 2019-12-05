@@ -6,6 +6,8 @@
 #define SCREEN_PORT 0x100
 //#define W 400
 //#define H 300
+uint32_t* fb = (uint32_t *)(uintptr_t)FB_ADDR;
+
 
 size_t __am_video_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
@@ -30,14 +32,14 @@ size_t __am_video_write(uintptr_t reg, void *buf, size_t size) {
       uint32_t *pixels = ctl->pixels;
       int cp_bytes = sizeof(uint32_t) * (w < W-x ? w : W-x);
       for (int i = 0; i < h && y + i < H; i ++) {
-        memcpy(buf+(y + i) * W + x, pixels, cp_bytes);
+        memcpy(&fb[(y + i) * W + x], pixels, cp_bytes);
         pixels += w;
       }
       // int W = screen_width();
       // int H = screen_height();
       // uint32_t* fb = (uint32_t *)(uintptr_t)FB_ADDR;
       if (ctl->sync) {
-        //outl(SYNC_ADDR, 0);
+        outl(SYNC_ADDR, 0);
       }
       return size;
     }
@@ -48,7 +50,6 @@ size_t __am_video_write(uintptr_t reg, void *buf, size_t size) {
 void __am_vga_init() {
   int i;
   int size = screen_width() * screen_height();
-  uint32_t* fb = (uint32_t *)(uintptr_t)FB_ADDR;
   for (i = 0; i < size; i++) fb[i] = i;
   draw_sync();
 }
