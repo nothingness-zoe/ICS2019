@@ -165,11 +165,13 @@ static int cmd_d(char *args) {
 
 static int cmd_detach(char *args) {
   difftest_detach();
+  printf("Exit DiffTest\n");
   return 0;
 }
 
 static int cmd_attach(char *args) {
   difftest_attach();
+  printf("Enter DiffTest\n");
   return 0;
 }
 
