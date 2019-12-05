@@ -50,6 +50,9 @@ static int cmd_w(char *args);
 
 static int cmd_d(char *args);
 
+static int cmd_detach(char *args);
+
+static int cmd_attach(char *args);
 
 
 static struct {
@@ -66,6 +69,8 @@ static struct {
   { "p", "Evaluate the expression", cmd_p},
   { "w", "Set watchpoint", cmd_w},
   { "d", "Delete watchpoint", cmd_d},
+  { "detach", "Exit DiffTest", cmd_detach},
+  { "attach", "Enter DiffTest", cmd_attach},
 
   /* TODO: Add more commands */
 
@@ -151,6 +156,15 @@ static int cmd_d(char *args) {
   int n;
   sscanf(arg, "%d", &n);
   free_wp(n);
+  return 0;
+}
+
+static int cmd_detach(char *args) {
+  // difftest_detach();
+  return 0;
+}
+
+static int cmd_attach(char *args) {
   return 0;
 }
 
