@@ -56,17 +56,18 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   // return DEFAULT_ENTRY;
 
   Elf_Ehdr ehdr;
-  ramdisk_read(&ehdr, 0, sizeof(ehdr));
+  int fd = fs_open(filename, 0, 0);
+  fs_read(fd, &ehdr, sizeof(ehdr));
 
   for (int i=0; i < ehdr.e_phnum; i++) {
     Elf_Phdr phdr;
-    ramdisk_read(&phdr, ehdr.e_phoff + i*ehdr.e_phentsize, ehdr.e_phentsize);
+    fs_lseek(fd, ehdr.e_phoff + i*ehdr.e_phentsize, SEEK_SET);
+    fs_read(fd, &phdr, ehdr.e_phentsize);
     if (phdr.p_type == PT_LOAD) {
-      int fd = fs_open(filename, 0, 0);
-      size_t size = fs_filesz(fd);
-      fs_read(fd, (void*)phdr.p_vaddr, size);
+      fs_lseek(fd, phdr.p_offset, SEEK_SET);      
+      fs_read(fd, (void*)phdr.p_vaddr, phdr.p_filesz);
       // fs_close(fd);
-      memset((void*)(phdr.p_vaddr + size), 0, phdr.p_memsz - phdr.p_filesz);
+      memset((void*)(phdr.p_vaddr + phdr.p_filesz), 0, phdr.p_memsz - phdr.p_filesz);
       // break;
     }
   }
