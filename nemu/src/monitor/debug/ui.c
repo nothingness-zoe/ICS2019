@@ -61,11 +61,11 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "Suspend the execution of the program after stepping through N instructions. When N is not given, the default is 1", cmd_si },
-  {"info", "Print register status with r. Print watchpoint information with w", cmd_info},
-  {"x", "Output N 4-byte in hexadecimal format from the start memory address", cmd_x},
-  {"p", "Evaluate the expression", cmd_p},
-  {"w", "Set watchpoint", cmd_w},
-  {"d", "Delete watchpoint", cmd_d},
+  { "info", "Print register status with r. Print watchpoint information with w", cmd_info},
+  { "x", "Output N 4-byte in hexadecimal format from the start memory address", cmd_x},
+  { "p", "Evaluate the expression", cmd_p},
+  { "w", "Set watchpoint", cmd_w},
+  { "d", "Delete watchpoint", cmd_d},
 
   /* TODO: Add more commands */
 
