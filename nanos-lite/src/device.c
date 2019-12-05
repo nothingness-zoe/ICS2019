@@ -66,6 +66,7 @@ void init_device() {
   // TODO: print the string to array `dispinfo` with the format
   // described in the Navy-apps convention
   sprintf(dispinfo, "WIDTH:%d\nHEIGHT:%d\n", screen_width(), screen_height());
-  char* out = dispinfo;
-  while(*out) printf("%s", out++);
+  // char* out = dispinfo;
+  // while(*out) printf("%s", out++);
+  for (int i=0; i < 128; i++) printf("%s", dispinfo[i]);
 }
