@@ -47,9 +47,9 @@ void init_fs() {
   file_table[fd].size = width*height*4;
 }
 
-size_t fs_filesz(int fd) {
-  return file_table[fd].size;
-}
+// size_t fs_filesz(int fd) {
+//   return file_table[fd].size;
+// }
 
 int fs_open (const char *pathname, int flags, int mode){
   for (int i=0; i < NR_FILES; i++) {
