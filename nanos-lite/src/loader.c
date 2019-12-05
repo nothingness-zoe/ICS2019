@@ -63,9 +63,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     ramdisk_read(&phdr, ehdr.e_phoff + i*ehdr.e_phentsize, ehdr.e_phentsize);
     if (phdr.p_type == PT_LOAD) {
       int fd = fs_open(filename, 0, 0);
-      fs_read(fd, (void*)phdr.p_vaddr, phdr.p_filesz);
-      fs_close(fd);
-      memset((void*)(phdr.p_vaddr + phdr.p_filesz), 0, phdr.p_memsz - phdr.p_filesz);
+      size_t size = fs_filesz(fd);
+      fs_read(fd, (void*)phdr.p_vaddr, size);
+      // fs_close(fd);
+      memset((void*)(phdr.p_vaddr + size), 0, phdr.p_memsz - phdr.p_filesz);
       // break;
     }
   }
