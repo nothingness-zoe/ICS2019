@@ -68,5 +68,4 @@ void init_device() {
   sprintf(dispinfo, "WIDTH:%d\nHEIGHT:%d\n", screen_width(), screen_height());
   // char* out = dispinfo;
   // while(*out) printf("%s", out++);
-  for (int i=0; i < 128; i++) printf("%s", dispinfo[i]);
 }
