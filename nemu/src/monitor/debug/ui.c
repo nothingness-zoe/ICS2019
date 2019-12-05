@@ -9,6 +9,10 @@
 
 void cpu_exec(uint64_t);
 
+void difftest_detach();
+
+void difftest_attach();
+
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
   static char *line_read = NULL;
@@ -69,8 +73,8 @@ static struct {
   { "p", "Evaluate the expression", cmd_p},
   { "w", "Set watchpoint", cmd_w},
   { "d", "Delete watchpoint", cmd_d},
-  { "detach", "Exit DiffTest", cmd_detach},
-  { "attach", "Enter DiffTest", cmd_attach},
+  { "detach", "Exit DiffTest mode", cmd_detach},
+  { "attach", "Enter DiffTest mode", cmd_attach},
 
   /* TODO: Add more commands */
 
@@ -160,11 +164,12 @@ static int cmd_d(char *args) {
 }
 
 static int cmd_detach(char *args) {
-  // difftest_detach();
+  difftest_detach();
   return 0;
 }
 
 static int cmd_attach(char *args) {
+  difftest_attach();
   return 0;
 }
 
