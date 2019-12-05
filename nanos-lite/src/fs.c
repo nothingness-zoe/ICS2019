@@ -88,7 +88,7 @@ size_t fs_write(int fd, const void * buf, size_t len) {
     return len;
   }
   else {
-    size_t num = file_table[fd].write(buf, file_table[fd].open_offset, len);
+    size_t num = file_table[fd].write(buf, file_table[fd].open_offset + file_table[fd].disk_offset, len);
     file_table[fd].open_offset += len;
     return num;
   }
