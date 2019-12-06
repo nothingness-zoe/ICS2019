@@ -45,6 +45,7 @@ void init_fs() {
   int height = screen_height();
   int fd = fs_open("/dev/fb", 0, 0);
   file_table[fd].size = width*height*4;
+  fs_close(fd);
 }
 
 size_t fs_filesz(int fd) {
