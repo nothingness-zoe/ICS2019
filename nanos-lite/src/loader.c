@@ -72,6 +72,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       // break;
     }
   }
+  fs_close(fd);
   
   return ehdr.e_entry;
 }
