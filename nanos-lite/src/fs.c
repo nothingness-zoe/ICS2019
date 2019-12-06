@@ -63,7 +63,7 @@ int fs_open (const char *pathname, int flags, int mode){
       return i;
     }
   }
-  printf("\033[0;32;32m");
+  printf("\033[0;32;31m");
   printf("%s not found\n", pathname);
   printf("\033[m");
   // Log("%s not found", pathname);
@@ -132,7 +132,7 @@ size_t fs_lseek (int fd, size_t offset, int whence) {
 }
 
 int fs_close(int fd) { 
-  printf("\033[0;32;32m");
+  printf("\033[0;32;34m");
   printf("close: %s\n", file_table[fd].name);
   printf("\033[m");
   // Log("close: %s", file_table[fd].name);
