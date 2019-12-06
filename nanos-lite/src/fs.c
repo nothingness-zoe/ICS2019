@@ -56,7 +56,7 @@ int fs_open (const char *pathname, int flags, int mode){
   for (int i=0; i < NR_FILES; i++) {
     if (strcmp(file_table[i].name, pathname) == 0) {
       file_table[i].open_offset = 0;
-      printf("\033[1;30m");
+      printf("\033[0;33m");
       printf("open: %s\n", pathname);
       printf("\033[m");
       // Log("open: %s", pathname);
