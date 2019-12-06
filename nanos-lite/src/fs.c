@@ -120,7 +120,7 @@ size_t fs_lseek (int fd, size_t offset, int whence) {
 }
 
 int fs_close(int fd) { 
-  printf("close: %s\n", file_table[fd].name);
+  // printf("close: %s\n", file_table[fd].name);
 
   return 0;
 }
