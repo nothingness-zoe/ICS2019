@@ -55,7 +55,7 @@ size_t fs_filesz(int fd) {
 int fs_open (const char *pathname, int flags, int mode){
   for (int i=0; i < NR_FILES; i++) {
     if (strcmp(file_table[i].name, pathname) == 0) {
-      // printf("open: %s\n", pathname);
+      printf("open: %s\n", pathname);
       return i;
     }
   }
@@ -120,7 +120,7 @@ size_t fs_lseek (int fd, size_t offset, int whence) {
 }
 
 int fs_close(int fd) { 
-  // printf("close: %s\n", file_table[fd].name);
+  printf("close: %s\n", file_table[fd].name);
 
   return 0;
 }
