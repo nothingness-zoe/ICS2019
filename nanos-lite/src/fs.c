@@ -73,39 +73,39 @@ int fs_open (const char *pathname, int flags, int mode){
 
 size_t fs_read(int fd, void * buf, size_t len) {
   if (file_table[fd].read == NULL) {
-    printf("before read open_offset:%d  len:%d\n", file_table[fd].open_offset,len);    
+    // printf("before read open_offset:%d  len:%d\n", file_table[fd].open_offset,len);    
     size_t aval_size = fs_filesz(fd) - file_table[fd].open_offset;
     if (aval_size < len) len = aval_size;
     // printf("disk_offset: %d\n",file_table[fd].disk_offset);
     ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
     file_table[fd].open_offset += len;
-    printf("after read open_offset:%d\n", file_table[fd].open_offset);
+    // printf("after read open_offset:%d\n", file_table[fd].open_offset);
 
     return len;
   }
   else {
-    printf("before read open_offset:%d  len:%d\n", file_table[fd].open_offset,len);
+    // printf("before read open_offset:%d  len:%d\n", file_table[fd].open_offset,len);
     size_t num = file_table[fd].read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
     file_table[fd].open_offset += len;
-    printf("after read open_offset:%d num:%d\n", file_table[fd].open_offset, num);
+    // printf("after read open_offset:%d num:%d\n", file_table[fd].open_offset, num);
     return num;
   }
 }
 
 size_t fs_write(int fd, const void * buf, size_t len) {
-  printf("before write open_offset:%d  len:%d\n", file_table[fd].open_offset,len);      
+  // printf("before write open_offset:%d  len:%d\n", file_table[fd].open_offset,len);      
   if (file_table[fd].write == NULL) { 
     size_t aval_size = fs_filesz(fd) - file_table[fd].open_offset;
     if (aval_size < len) len = aval_size;
     ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
     file_table[fd].open_offset += len;
-    printf("after write open_offset:%d", file_table[fd].open_offset);
+    // printf("after write open_offset:%d", file_table[fd].open_offset);
     return len;
   }
   else {
     size_t num = file_table[fd].write(buf, file_table[fd].open_offset + file_table[fd].disk_offset, len);
     file_table[fd].open_offset += len;
-    printf("after write open_offset:%d num:%d\n", file_table[fd].open_offset, num);
+    // printf("after write open_offset:%d num:%d\n", file_table[fd].open_offset, num);
     
     return num;
   }
@@ -113,12 +113,12 @@ size_t fs_write(int fd, const void * buf, size_t len) {
 
 size_t fs_lseek (int fd, size_t offset, int whence) {
   size_t size = fs_filesz(fd);
-  printf("before lseek open_offset:%d offset:%d whence:%d\n", file_table[fd].open_offset, offset, whence);
+  // printf("before lseek open_offset:%d offset:%d whence:%d\n", file_table[fd].open_offset, offset, whence);
   switch (whence) {
     case SEEK_SET: {
       if (offset > size || offset < 0) return -1;
       file_table[fd].open_offset = offset;
-      printf("after lseek open_offset:%d\n", file_table[fd].open_offset);
+      // printf("after lseek open_offset:%d\n", file_table[fd].open_offset);
       return offset;
     } break;
     case SEEK_CUR: {
