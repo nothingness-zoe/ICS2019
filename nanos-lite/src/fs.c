@@ -114,6 +114,7 @@ size_t fs_lseek (int fd, size_t offset, int whence) {
     case SEEK_SET: {
       if (offset > size || offset < 0) return -1;
       file_table[fd].open_offset = offset;
+      printf("after lseek open_offset:%d\n", file_table[fd].open_offset);
       return offset;
     } break;
     case SEEK_CUR: {
@@ -130,7 +131,6 @@ size_t fs_lseek (int fd, size_t offset, int whence) {
     } break;
     default: return -1; break;
   }
-  printf("after lseek open_offset:%d\n", file_table[fd].open_offset);
 
 }
 
