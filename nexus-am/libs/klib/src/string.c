@@ -108,6 +108,7 @@ void* memcpy(void* out, const void* in, size_t n) {
   while (off--) {
     *dst++ = '\0';
   }*/
+  _putc('m');
   size_t offset = 0;
   while(offset < n) {
     *dst = *src;
