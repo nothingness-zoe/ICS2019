@@ -17,12 +17,13 @@ void hello_fun(void *arg) {
     Log("Hello World from Nanos-lite for the %dth time!", j);
     j ++;
     _yield();
+    printf("once\n");
   }
 }
 
 void init_proc() {
   Log("Initializing processes...");
-  
+
   context_kload(&pcb[0], (void*)hello_fun);
   context_kload(&pcb[1], "/bin/init");
   switch_boot_pcb();
