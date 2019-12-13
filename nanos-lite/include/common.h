@@ -40,6 +40,5 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len);
 void sys_execve(const char * filename);
 
 _Context* schedule(_Context *prev);
-void context_kload(PCB *pcb, void *entry);
 
 #endif
