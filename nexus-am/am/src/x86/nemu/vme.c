@@ -87,7 +87,7 @@ _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, 
   // return NULL;
   _Context* context = (_Context*)(ustack.end-2*sizeof(_Context));
   context->eip = (intptr_t)entry;
-  context->cs = 8;
+  // context->cs = 8;
   context->eflags = 0x200;
 
   return context;

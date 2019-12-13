@@ -64,7 +64,7 @@ _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
   // return NULL;
   _Context* context = (_Context*)(stack.end-sizeof(_Context));
   context->eip = (intptr_t)entry;
-  context->cs = 8;
+  // context->cs = 8;
 
   return context;
 }
