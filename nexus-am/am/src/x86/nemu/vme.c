@@ -84,7 +84,16 @@ void __am_switch(_Context *c) {
 }
 
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
-  
+  PDE *dir = as->ptr;
+  PTE* page;
+  if (dir[PDX(va)] & PTE_P) {
+    page = (PTE*)PTE_ADDR(dir[PDX(va)]);
+  }
+  else {
+    page = (PTE*)pgalloc_usr(1);
+    dir[PDX(va)] = PTE_ADDR(page) | PTE_P;
+  }
+  page[PTX(va)] = PTE_ADDR(pa) | PTE_P;
   
   return 0;
 }
@@ -95,6 +104,7 @@ _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, 
   context->eip = (intptr_t)entry;
   // context->cs = 8;
   context->eflags = 0x200;
+  context->as = as;
 
   return context;
 }

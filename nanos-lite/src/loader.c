@@ -60,18 +60,42 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   int fd = fs_open(filename, 0, 0);
   fs_read(fd, &ehdr, sizeof(ehdr));
 
+  // for (int i=0; i < ehdr.e_phnum; i++) {
+  //   Elf_Phdr phdr;
+  //   fs_lseek(fd, ehdr.e_phoff + i*ehdr.e_phentsize, SEEK_SET);
+  //   fs_read(fd, &phdr, ehdr.e_phentsize);
+  //   if (phdr.p_type == PT_LOAD) {
+  //     fs_lseek(fd, phdr.p_offset, SEEK_SET);      
+  //     fs_read(fd, (void*)phdr.p_vaddr, phdr.p_filesz);
+  //     // fs_close(fd);
+  //     memset((void*)(phdr.p_vaddr + phdr.p_filesz), 0, phdr.p_memsz - phdr.p_filesz);
+  //     // break;
+  //   }
+  // }
+
   for (int i=0; i < ehdr.e_phnum; i++) {
     Elf_Phdr phdr;
     fs_lseek(fd, ehdr.e_phoff + i*ehdr.e_phentsize, SEEK_SET);
     fs_read(fd, &phdr, ehdr.e_phentsize);
     if (phdr.p_type == PT_LOAD) {
       fs_lseek(fd, phdr.p_offset, SEEK_SET);      
-      fs_read(fd, (void*)phdr.p_vaddr, phdr.p_filesz);
-      // fs_close(fd);
-      memset((void*)(phdr.p_vaddr + phdr.p_filesz), 0, phdr.p_memsz - phdr.p_filesz);
-      // break;
+      uint32_t offset = 0;
+      for (; offset < phdr.p_memsz ; offset += PGSIZE) {
+        void* pa = new_page(1);
+        _map(&(pcb->as), (void*)(phdr.p_vaddr + offset), pa, 1);
+        uint32_t len;
+        if (phdr.p_filesz - offset >= 0) {
+          len = phdr.p_filesz - offset >= PGSIZE ? PGSIZE : phdr.p_filesz - offset;
+          fs_read(fd, pa, len);
+          memset((void*)(pa+len), 0, PGSIZE - len);
+        }
+        else {
+          memset(pa, 0, PGSIZE);
+        }
+      }
     }
   }
+
   fs_close(fd);
   
   return ehdr.e_entry;
