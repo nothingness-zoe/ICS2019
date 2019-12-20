@@ -7,11 +7,11 @@ paddr_t page_translate(vaddr_t addr) {
     PDE pde;
     pde.val = paddr_read(pde_addr, 4);
     assert(pde.present);
-    uintptr_t pte_addr = (uintptr_t)(pde.page_frame<<12+ (addr<<10)>>22);
+    uintptr_t pte_addr = (uintptr_t)((pde.page_frame<<12)+ ((addr<<10)>>22));
     PTE pte;
     pte.val = paddr_read(pte_addr, 4);
     assert(pte.present);
-    paddr = (pte,page_frame<<12)+(addr&0xfff);
+    paddr = (pte.page_frame<<12)+(addr&0xfff);
   }
   return paddr;
 }
