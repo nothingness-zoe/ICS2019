@@ -3,6 +3,7 @@
 paddr_t page_translate(vaddr_t addr) {
   paddr_t paddr = addr;
   if(cpu.cr0.paging) {
+    printf("paging: %d\n", cpu.cr0.paging);
     // uintptr_t pde_addr = (uintptr_t)((cpu.cr3.page_directory_base << 12) + (((addr>>22)&0xfff)<<2));
     PDE* pde_p = (PDE*)(uintptr_t)(cpu.cr3.page_directory_base << 12);
     PDE pde;
