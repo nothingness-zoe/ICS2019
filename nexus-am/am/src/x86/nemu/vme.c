@@ -28,7 +28,7 @@ int _vme_init(void* (*pgalloc_f)(size_t), void (*pgfree_f)(void*)) {
   for (i = 0; i < NR_PDE; i ++) {
     kpdirs[i] = 0;
   }
-  _putc('0');
+  // _putc('0');
 
   PTE *ptab = kptabs;
   for (i = 0; i < NR_KSEG_MAP; i ++) {
@@ -47,6 +47,7 @@ int _vme_init(void* (*pgalloc_f)(size_t), void (*pgfree_f)(void*)) {
       }
     }
   }
+  _putc('s');
 
   set_cr3(kpdirs);
   set_cr0(get_cr0() | CR0_PG);
