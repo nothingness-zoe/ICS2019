@@ -3,9 +3,10 @@
 paddr_t page_translate(vaddr_t addr) {
   paddr_t paddr = addr;
   if(cpu.cr0.paging) {
-    uintptr_t pde_addr = (uintptr_t)((cpu.cr3.page_directory_base << 12) + (((addr>>22)&0xfff)<<2));
+    // uintptr_t pde_addr = (uintptr_t)((cpu.cr3.page_directory_base << 12) + (((addr>>22)&0xfff)<<2));
+    PDE* pde_p = (PDE*)(uintptr_t)(cpu.cr3.page_directory_base << 12);
     PDE pde;
-    pde.val = paddr_read(pde_addr, 4);
+    pde.val = paddr_read((uintptr_t)&pde_p[addr>>22], 4);
     Assert(pde.present, "addr: %#x", addr);
     uintptr_t pte_addr = (uintptr_t)((pde.page_frame<<12)+ ((addr<<10)>>22));
     PTE pte;
