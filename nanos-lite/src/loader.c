@@ -80,7 +80,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     if (phdr.p_type == PT_LOAD) {
       fs_lseek(fd, phdr.p_offset, SEEK_SET);      
       uint32_t offset = 0;
-      for (; offset < phdr.p_memsz ; offset += PGSIZE) {
+      for (; offset < phdr.p_memsz + PGSIZE; offset += PGSIZE) {
         void* pa = new_page(1);
         _map(&(pcb->as), (void*)(phdr.p_vaddr + offset), pa, 1);
         uint32_t len;
@@ -90,7 +90,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
           memset((void*)(pa+len), 0, PGSIZE - len);
         }
         else {
-          memset(pa, 0, PGSIZE);
+          len = offset > phdr.p_memsz? PGSIZE + phdr.p_memsz - offset : PGSIZE;
+          memset(pa, 0, len);
         }
       }
     }
