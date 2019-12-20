@@ -47,13 +47,13 @@ int _vme_init(void* (*pgalloc_f)(size_t), void (*pgfree_f)(void*)) {
       }
     }
   }
-  _putc('s');
+  // _putc('s');
 
   set_cr3(kpdirs);
   set_cr0(get_cr0() | CR0_PG);
   vme_enable = 1;
 
-  _putc('s');
+  // _putc('s');
   return 0;
 }
 
