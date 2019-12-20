@@ -9,9 +9,11 @@ paddr_t page_translate(vaddr_t addr) {
     PDE pde;
     pde.val = paddr_read((uintptr_t)&pde_p[addr>>22], 4);
     Assert(pde.present, "addr: %#x", addr);
-    uintptr_t pte_addr = (uintptr_t)((pde.page_frame<<12)+ ((addr<<10)>>22));
+    // uintptr_t pte_addr = (uintptr_t)((pde.page_frame<<12)+ ((addr<<10)>>22));
+    PTE* pte_p = (PTE*)(uintptr_t)(pde.page_frame<<12);
     PTE pte;
-    pte.val = paddr_read(pte_addr, 4);
+    // pte.val = paddr_read(pte_addr, 4);
+    pte.val = paddr_read((uintptr_t)&pte_p[(addr<<10)>>22], 4);
     Assert(pte.present, "addr: %#x", addr);
     paddr = (pte.page_frame<<12)+(addr&0xfff);
   }
