@@ -6,11 +6,11 @@ paddr_t page_translate(vaddr_t addr) {
     uintptr_t pde_addr = (uintptr_t)((cpu.cr3.page_directory_base << 12) + (addr>>22));
     PDE pde;
     pde.val = paddr_read(pde_addr, 4);
-    assert(pde.present);
+    Assert(pde.present, "addr: %#x", addr);
     uintptr_t pte_addr = (uintptr_t)((pde.page_frame<<12)+ ((addr<<10)>>22));
     PTE pte;
     pte.val = paddr_read(pte_addr, 4);
-    assert(pte.present);
+    Assert(pte.present, "addr: %#x", addr);
     paddr = (pte.page_frame<<12)+(addr&0xfff);
   }
   return paddr;
