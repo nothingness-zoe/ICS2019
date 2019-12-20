@@ -24,5 +24,5 @@ void init_mm() {
 
   _vme_init(new_page, free_page);
 
-  // Log("init_mm success");
+  Log("init_mm success");
 }
