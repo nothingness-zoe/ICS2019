@@ -71,6 +71,10 @@ make_EHelper(lidt);
 make_EHelper(int);
 make_EHelper(iret);
 
+make_EHelper(mov_cr2r);
+make_EHelper(mov_r2cr);
+
+
 /*// control.c
 make_EHelper(jmp);
 make_EHelper(jmp_rm);
