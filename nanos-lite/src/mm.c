@@ -24,6 +24,7 @@ int mm_brk(uintptr_t brk, intptr_t increment) {
     if ((current->max_brk & ~0xfff) == current->max_brk) start = current->max_brk;
     else start = (current->max_brk & ~0xfff) + PGSIZE;
     for (va = start; va < brk; va += PGSIZE) {
+      printf("one time\n");
       pa = new_page(1);
       _map(&current->as, (void*)va, pa, 1);
     }
