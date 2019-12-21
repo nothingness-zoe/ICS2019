@@ -17,6 +17,7 @@ void free_page(void *p) {
 /* The brk() system call handler. */
 int mm_brk(uintptr_t brk, intptr_t increment) {
   if (current->max_brk < brk) {
+    printf("mm_brk work\n");
     uintptr_t va;
     void* pa;
     uintptr_t start;
@@ -27,6 +28,7 @@ int mm_brk(uintptr_t brk, intptr_t increment) {
       _map(&current->as, (void*)va, pa, 1);
     }
     current->max_brk = brk;
+    printf("mm_brk success\n");
   }
   return 0;
 
