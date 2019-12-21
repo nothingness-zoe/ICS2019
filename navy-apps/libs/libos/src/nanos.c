@@ -63,23 +63,9 @@ int _write(int fd, void *buf, size_t count) {
 }
 
 extern char end;
-static int flag=0;
-// static intptr_t program_break = (intptr_t)(&end);
-static int program_break = 0;
-// void *_sbrk(intptr_t increment) {
-//   intptr_t temp = program_break;
-//   if (_syscall_(SYS_brk, temp, increment, 0) == 0) {
-//     program_break += increment;
-//     return (void*)temp;
-//   }
-//   return (void *)-1;
-// }
+static intptr_t program_break = (intptr_t)(&end);
 void *_sbrk(intptr_t increment) {
-  if (!flag) {
-    program_break = (int)&end;
-    flag=1;
-  }
-  int temp = program_break;
+  intptr_t temp = program_break;
   if (_syscall_(SYS_brk, temp, increment, 0) == 0) {
     program_break += increment;
     return (void*)temp;
