@@ -19,9 +19,9 @@ int mm_brk(uintptr_t brk, intptr_t increment) {
   if (current->max_brk == 0) {
     printf("mm_brk work\nbrk: %p  increment: %p max_brk: %p\n", brk, increment, current->max_brk);
     printf("current->as: %p\n", current->as);
-    // current->max_brk = (brk & 0xfff) ? ((brk & ~0xfff)+PGSIZE) : brk;
+    current->max_brk = (brk & 0xfff) ? ((brk & ~0xfff)+PGSIZE) : brk;
     // current->max_brk = brk;
-    current->max_brk = (uintptr_t)_heap.start;
+    // current->max_brk = (uintptr_t)_heap.start;
     if (current->max_brk < brk + increment) {
       printf("mm_brk work\nbrk: %p  max_brk: %p\n", brk, current->max_brk);
       uintptr_t va;
