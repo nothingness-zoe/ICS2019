@@ -38,6 +38,7 @@ _Context* __am_irq_handle(_Context *c) {
     }
   }
   __am_switch(next);
+  printf("__am_irq_handle success\n");
   return next;
 }
 
