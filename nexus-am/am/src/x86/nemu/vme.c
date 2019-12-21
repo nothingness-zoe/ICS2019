@@ -84,7 +84,7 @@ void __am_switch(_Context *c) {
 }
 
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
-  PDE *dir = as->ptr;
+  PDE *dir = (PDE*)as->ptr;
   PTE* page;
   if (dir[PDX(va)] & PTE_P) {
     page = (PTE*)PTE_ADDR(dir[PDX(va)]);
