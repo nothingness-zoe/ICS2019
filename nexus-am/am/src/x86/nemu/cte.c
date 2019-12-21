@@ -12,6 +12,8 @@ void __am_get_cur_as(_Context *c);
 void __am_switch(_Context *c);
 
 _Context* __am_irq_handle(_Context *c) {
+  printf("__am_irq_handle start\n");
+
   __am_get_cur_as(c);
   _Context *next = c;
   // printf("eax: %x\n", c->eax);
