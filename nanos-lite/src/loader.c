@@ -99,7 +99,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 
   fs_close(fd);
   printf("e_entry: %p\n", ehdr.e_entry);
-  printf("pcb->as: %p\n", &pcb->as);
+  printf("pcb->as: %p\n", pcb->as);
   return ehdr.e_entry;
 }
 
