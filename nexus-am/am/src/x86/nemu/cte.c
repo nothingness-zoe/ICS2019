@@ -12,7 +12,7 @@ void __am_get_cur_as(_Context *c);
 void __am_switch(_Context *c);
 
 _Context* __am_irq_handle(_Context *c) {
-  // printf("__am_irq_handle start\n");
+  printf("__am_irq_handle start\n");
 
   __am_get_cur_as(c);
   _Context *next = c;
@@ -40,7 +40,7 @@ _Context* __am_irq_handle(_Context *c) {
     }
   }
   __am_switch(next);
-  // printf("__am_irq_handle success\n");
+  printf("__am_irq_handle success\n");
   return next;
 }
 
