@@ -38,7 +38,7 @@ _Context* do_syscall(_Context *c) {
     case SYS_open: c->GPRx = fs_open((char*)a[1], a[2], a[3]); break;
     case SYS_lseek: c->GPRx = fs_lseek(a[1], a[2], a[3]); break;
     case SYS_close: c->GPRx = fs_close(a[1]); break;
-    case SYS_brk: c->GPRx = mm_brk(a[1]); break; // TODO: sys_brk()
+    case SYS_brk: c->GPRx = mm_brk(a[1], a[2]); break; // TODO: sys_brk()
     case SYS_execve: sys_execve((char*)a[1]); break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
