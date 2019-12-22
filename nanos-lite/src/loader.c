@@ -11,6 +11,7 @@
 #endif
 // # define DEFAULT_ENTRY 0x3000000
 
+uintptr_t heapstart;
 static uintptr_t loader(PCB *pcb, const char *filename) {
   // TODO();
   // printf("remdisk_size: %x\n", get_ramdisk_size());
@@ -94,6 +95,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
           memset(pa, 0, PGSIZE);
         }
       }
+      heapstart = ehdr.e_entry + phdr.p_memsz;
     }
   }
 
