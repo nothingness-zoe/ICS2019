@@ -74,7 +74,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   //   }
   // }
 
-  int nr_page = 0;
+  // int nr_page = 0;
   for (int i=0; i < ehdr.e_phnum; i++) {
     Elf_Phdr phdr;
     fs_lseek(fd, ehdr.e_phoff + i*ehdr.e_phentsize, SEEK_SET);
@@ -84,7 +84,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       uint32_t offset = 0;
       for (; offset < phdr.p_memsz ; offset += PGSIZE) {
         void* pa = new_page(1);
-        nr_page++;
+        // nr_page++;
         _map(&(pcb->as), (void*)(phdr.p_vaddr + offset), pa, 1);
         uint32_t len = phdr.p_filesz - offset >= PGSIZE ? PGSIZE : phdr.p_filesz - offset;
         fs_read(fd, pa, len);
@@ -93,13 +93,13 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       if (phdr.p_memsz - phdr.p_filesz/PGSIZE >PGSIZE) {
         for (; offset < phdr.p_memsz; offset += PGSIZE) {
           void* pa = new_page(1);
-          nr_page++;
+          // nr_page++;
           _map(&(pcb->as), (void*)(phdr.p_vaddr + offset), pa, 1);
           memset(pa, 0, PGSIZE);
         }
       }
       // heapstart = ehdr.e_entry + phdr.p_memsz;
-      heapstart = ehdr.e_entry;
+      // heapstart = ehdr.e_entry;
     }
   }
 
