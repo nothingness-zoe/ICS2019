@@ -28,6 +28,8 @@ void init_proc() {
   // context_uload(&pcb[1], "/bin/init");
   context_uload(&pcb[0], "/bin/hello");
   context_uload(&pcb[1], "/bin/pal");
+  context_uload(&pcb[2], "/bin/pal");
+  context_uload(&pcb[3], "/bin/pal");
   switch_boot_pcb();
 
   // load program here
@@ -36,6 +38,7 @@ void init_proc() {
 }
 
 static int count = 0;
+extern int fg_pcb;
 _Context* schedule(_Context *prev) {
   // return NULL;
   current->cp = prev;
@@ -45,7 +48,8 @@ _Context* schedule(_Context *prev) {
     current = &pcb[0];
   }
   else {
-    current = &pcb[1];
+    // current = &pcb[1];
+    current = &pcb[fg_pcb];
   }
   count = (count+1)%1000;
   return current->cp;

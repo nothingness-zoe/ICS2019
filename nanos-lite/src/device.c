@@ -19,13 +19,16 @@ static const char *keyname[256] __attribute__((used)) = {
 };
 
 #define KEYDOWN_MASK 0x8000
-
+int fg_pcb = 1;
 size_t events_read(void *buf, size_t offset, size_t len) {
   // _yield();  
   int keycode = read_key();
   if (keycode != _KEY_NONE) {
     if (keycode & KEYDOWN_MASK) {
       keycode = keycode & ~KEYDOWN_MASK;
+      if (strcmp("F1", keyname[keycode]) == 0) fg_pcb = 1;
+      else if (strcmp("F2", keyname[keycode]) == 0) fg_pcb = 2;
+      else if (strcmp("F3", keyname[keycode]) == 0) fg_pcb = 3;
       return sprintf(buf, "kd %s\n", keyname[keycode]);
     }
     else return sprintf(buf, "ku %s\n", keyname[keycode]);
