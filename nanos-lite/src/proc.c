@@ -35,13 +35,16 @@ void init_proc() {
   // Log("Finish initializing processes...");
 }
 
+static int count = 0;
 _Context* schedule(_Context *prev) {
   // return NULL;
   current->cp = prev;
 
   // current = &pcb[0];
-  current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
-
+  if (count == 0) {
+    current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
+  }
+  count = (count+1)%100;
   return current->cp;
 }
 
