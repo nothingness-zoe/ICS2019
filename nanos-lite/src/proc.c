@@ -44,7 +44,7 @@ _Context* schedule(_Context *prev) {
   if (count == 0) {
     current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
   }
-  count = (count+1)%100;
+  count = (count+1)%1000;
   return current->cp;
 }
 
